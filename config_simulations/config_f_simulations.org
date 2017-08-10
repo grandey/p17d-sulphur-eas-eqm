@@ -1,0 +1,79 @@
+#+TITLE: Configure prescribed-SST (F) simulations
+#+AUTHOR: Benjamin S. Grandey
+#+OPTIONS: ^:nil
+
+** General notes
+
+*** Experimental design
+For an overview of the experimental design, please see [[https://github.com/grandey/p17d-sulphur-eas-eqm/blob/master/README.org][README.org]].
+
+*** CESM version
+The simulations use CESM 1.2.2.1 (CESM 1.2.2 configured for Cheyenne), found in =~/models/cesm1_2_2_1= on Cheyenne.
+
+*** Component set
+The prescribed-SST (F) simulations will be based on the =F_2000_CAM5= (=FC5=) component set.
+
+*** Processor layout
+The simulations will be configured with a layout of =NTASKS=720=, spread across 20 nodes. This layout is contained in =~/models/cesm1_2_2_1/scripts/pes/p720n20.xml= on Cheyenne.
+
+*** =user_nl_cam= files
+The =user_nl_cam= files will be pulled from GitHub using =wget=.
+
+*** Symbolic link to run directory
+To facilitate ease of access to the run directory, I like to create a symbolic link (=ln -s /glade/scratch/bgrandey/$CASENAME/run/ scratch_run=).
+
+*** Submission to the =economy= queue
+By default, my =.run= files are configured for submission to the =regular= queue. In order to submit to the =economy= queue, the =.run= file can be modified using =sed -i 's/regular/economy/g' $CASENAME.run=.
+
+** Creation, configuration, and submission of comparison simulations
+
+The source code blocks below are tangled using =C-c C-v t= in order to create bash scripts named =create_<CASENAME>.sh=.
+All five comparison simulations have been created, configured, built, and submitted using these bash scripts on 2017-07-21.
+
+*** TODO =p17d_f_2000=
+
+#+BEGIN_SRC :tangle yes :tangle create_p17d_f_2000.sh :shebang #!/bin/bash
+CASENAME=p17d_f_2000
+
+cd ~/models/cesm1_2_2_1/scripts/
+./create_newcase -case ~/cesm1_2_2_1_cases/$CASENAME -res f19_g16 -compset FC5 -mach cheyenne -pes_file pes/p720n20.xml
+
+cd ~/cesm1_2_2_1_cases/$CASENAME
+./cesm_setup
+wget https://raw.githubusercontent.com/grandey/p17d-sulphur-eas-eqm/master/user_nl_cam/user_nl_cam_$CASENAME
+mv user_nl_cam_$CASENAME user_nl_cam
+./$CASENAME.build
+ln -s /glade/scratch/bgrandey/$CASENAME/run/ scratch_run
+./xmlchange STOP_OPTION=nyears
+./xmlchange STOP_N=8
+./xmlchange RESUBMIT=3
+sed -i 's/regular/economy/g' $CASENAME.run
+./$CASENAME.submit
+#+END_SRC
+
+Notes:
+
+*** TODO =p17d_f_eas0=
+
+#+BEGIN_SRC :tangle yes :tangle create_p17d_f_eas0.sh :shebang #!/bin/bash
+CASENAME=p17d_f_eas0
+
+cd ~/models/cesm1_2_2_1/scripts/
+./create_newcase -case ~/cesm1_2_2_1_cases/$CASENAME -res f19_g16 -compset FC5 -mach cheyenne -pes_file pes/p720n20.xml
+
+cd ~/cesm1_2_2_1_cases/$CASENAME
+./cesm_setup
+wget https://raw.githubusercontent.com/grandey/p17d-sulphur-eas-eqm/master/user_nl_cam/user_nl_cam_$CASENAME
+mv user_nl_cam_$CASENAME user_nl_cam
+./$CASENAME.build
+ln -s /glade/scratch/bgrandey/$CASENAME/run/ scratch_run
+./xmlchange STOP_OPTION=nyears
+./xmlchange STOP_N=8
+./xmlchange RESUBMIT=3
+sed -i 's/regular/economy/g' $CASENAME.run
+./$CASENAME.submit
+#+END_SRC
+
+Notes:
+- Similar to =p17d_f_2000=, but with different CASENAME (which determines the =user_nl_cam= to be used).
+

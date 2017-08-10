@@ -12,7 +12,7 @@ Two emissions scenarios will be investigated:
 1. *=year-2000=*, which follows the default MAM3 emissions for the =F_2000_CAM5= (=FC5=) compset.
 2. *=eas0=*, which is similar to the above, but with no sulphur (SO2 and SO4) emissions from the energy and industry sectors over East and Southeast Asia (94E-161E, 10S-65N). The following emissions files will be modified: =ar5_mam3_so2_elev_2000_c090726.nc=, =ar5_mam3_so4_a1_elev_2000_c090726.nc=, and =ar5_mam3_num_a1_elev_2000_c090726.nc=.
 
-*** Prescribed-SST simulations
+*** Prescribed-SST (F) simulations
 In order to quantify radiative effects, two prescribed-SST simulations will be performed:
 1. *=p17d_f_2000=*, which uses the *=year-2000=* emissions.
 2. *=p17d_f_eas0=*, which uses the *=eas0=* emissions.
@@ -24,7 +24,7 @@ These prescribed-SST simulations will be configured as follows:
 4. Each simulation will be run for *32 years*, and the first two years will be excluded as spin-up. (Nudging will not be performed.)
 5. The simulations will be performed on *Cheyenne*, using 720 processors (20 nodes). Model throughput is expected to be approximately 40 years/day, with a cost of 400 pe-hrs/yr.
 
-*** Equilibrium coupled atmosphere-ocean simulations
+*** Equilibrium coupled atmosphere-ocean (B) simulations
 In order to investigate the equilibrium climate response, two coupled atmosphere-ocean simulations will be performed:
 1. *=p17d_b_2000=*, which uses the *=year-2000=* emissions.
 2. *=p17d_b_eas0=*, which uses the *=eas0=* emissions.
