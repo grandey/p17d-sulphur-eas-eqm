@@ -26,5 +26,5 @@ fincl2 = 'PHIS:I','PS:I','PSL:I','Q:I','SST:I','T:I','TS:I','U:I','V:I','Z3:I'
 
 nhtfrq = 0, -6
 
-mfilt = 1, 4
+mfilt = 1, 1
 

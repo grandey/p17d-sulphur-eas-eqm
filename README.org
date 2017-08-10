@@ -34,7 +34,7 @@ These atmosphere-ocean simulations will be configured as follows:
 2. Data for *dynamical downscaling* will be produced.
 3. A resolution of *f19_g16* will be specified.
 4. Each simulation will be run for *100 years*, allowing several decades to be excluded as spin-up.
-5. The simulations will be performed on *Cheyenne*, using 128 processors for the ocean in addition to 720 processors for the other model components (24 nodes total). Model throughput is expected to be approximately 50 years/day, with a cost of 400 pe-hrs/yr.
+5. The simulations will be performed on *Cheyenne*, using 128 processors for the ocean in addition to 720 processors for the other model components (24 nodes total). Model throughput is expected to be approximately 30 years/day, with a cost of approximately 600 pe-hrs/yr.
 
 ** Status
 
