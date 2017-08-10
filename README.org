@@ -22,7 +22,7 @@ These prescribed-SST simulations will be configured as follows:
 2. The *RFP components* will be diagnosed following [[http://www.atmos-chem-phys.net/13/9971/2013/][Ghan (2013)]]. The "online" radiation call will include aerosol-radiation interactions; the "offline" diagnostic radiation call will calculate "clean-sky" fluxes.
 3. A resolution of *f19_g16* will be specified.
 4. Each simulation will be run for *32 years*, and the first two years will be excluded as spin-up. (Nudging will not be performed.)
-5. The simulations will be performed on *Cheyenne*, using 720 processors (20 nodes). Model throughput is expected to be approximately 39 years/day, with a cost of 440 pe-hrs/yr.
+5. The simulations will be performed on *Cheyenne*, using 720 processors (20 nodes). Model throughput is expected to be approximately 40 years/day, with a cost of 400 pe-hrs/yr.
 
 *** Equilibrium coupled atmosphere-ocean simulations
 In order to investigate the equilibrium climate response, two coupled atmosphere-ocean simulations will be performed:
