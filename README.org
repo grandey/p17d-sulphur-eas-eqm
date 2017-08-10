@@ -18,11 +18,13 @@ In order to quantify radiative effects, two prescribed-SST simulations will be p
 2. *=p17d_f_eas0=*, which uses the *=eas0=* emissions.
 
 These prescribed-SST simulations will be configured as follows:
-1. Greenhouse gas concentrations and sea-surface temperatures (SSTs) will be prescribed using *year-2000 climatological values*, based on the =F_2000_CAM5= (=FC5=) component set.
+1. Greenhouse gas concentrations and sea-surface temperatures (SSTs) will be prescribed using *year-2000 climatological values*, based on the =F_2000_CAM5= (=FC5=) [[http://www.cesm.ucar.edu/models/cesm1.2/cesm/doc/modelnl/compsets.html][compset]].
 2. The *RFP components* will be diagnosed following [[http://www.atmos-chem-phys.net/13/9971/2013/][Ghan (2013)]]. The "online" radiation call will include aerosol-radiation interactions; the "offline" diagnostic radiation call will calculate "clean-sky" fluxes.
 3. A resolution of *f19_g16* will be specified.
 4. Each simulation will be run for *32 years*, and the first two years will be excluded as spin-up. (Nudging will not be performed.)
 5. The simulations will be performed on *Cheyenne*, using 720 processors (20 nodes). Model throughput is expected to be approximately 40 years/day, with a cost of 400 pe-hrs/yr.
+
+Details of the configuration can be found in [[https://github.com/grandey/p17d-sulphur-eas-eqm/blob/master/config_simulations/config_f_simulations.org][config_f_simulations.org]].
 
 *** Equilibrium coupled atmosphere-ocean (B) simulations
 In order to investigate the equilibrium climate response, two coupled atmosphere-ocean simulations will be performed:
@@ -30,11 +32,13 @@ In order to investigate the equilibrium climate response, two coupled atmosphere
 2. *=p17d_b_eas0=*, which uses the *=eas0=* emissions.
 
 These atmosphere-ocean simulations will be configured as follows:
-1. Greenhouse gas concentrations will be prescribed using *year-2000 climatological values*, based on the =B_2000_CAM5_CN= (=BC5CN=) compset.
+1. Greenhouse gas concentrations will be prescribed using *year-2000 climatological values*, based on the =B_2000_CAM5_CN= (=BC5CN=) [[http://www.cesm.ucar.edu/models/cesm1.2/cesm/doc/modelnl/compsets.html][compset]].
 2. Data for *dynamical downscaling* will be produced.
 3. A resolution of *f19_g16* will be specified.
 4. Each simulation will be run for *100 years*, allowing several decades to be excluded as spin-up.
 5. The simulations will be performed on *Cheyenne*, using 128 processors for the ocean in addition to 720 processors for the other model components (24 nodes total). Model throughput is expected to be approximately 30 years/day, with a cost of approximately 600 pe-hrs/yr.
+
+Details of the configuration can be found in [[https://github.com/grandey/p17d-sulphur-eas-eqm/blob/master/config_simulations/config_b_simulations.org][config_b_simulations.org]].
 
 ** Status
 

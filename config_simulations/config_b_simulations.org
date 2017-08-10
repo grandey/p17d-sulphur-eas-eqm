@@ -1,4 +1,4 @@
-#+TITLE: Configure prescribed-SST (F) simulations
+#+TITLE: Configure coupled atmosphere-ocean (B) simulations
 #+AUTHOR: Benjamin S. Grandey
 #+OPTIONS: ^:nil
 
@@ -11,18 +11,20 @@ For an overview of the experimental design, please see [[https://github.com/gran
 The simulations use CESM 1.2.2.1 (CESM 1.2.2 configured for Cheyenne), found in =~/models/cesm1_2_2_1= on Cheyenne.
 
 *** Component set
-The prescribed-SST (F) simulations will be based on the =F_2000_CAM5= (=FC5=) [[http://www.cesm.ucar.edu/models/cesm1.2/cesm/doc/modelnl/compsets.html][compset]].
+The coupled atmosphere-ocean (B) simulations will be based on the =B_2000_CAM5_CN= (=BC5CN=) [[http://www.cesm.ucar.edu/models/cesm1.2/cesm/doc/modelnl/compsets.html][compset]].
 
 *** Processor layout
-The simulations will be configured with a layout of =NTASKS=720=, spread across 20 nodes. This layout is contained in =~/models/cesm1_2_2_1/scripts/pes/p720n20.xml= on Cheyenne.
+The simulations will be configured with a layout of =NTASKS=720= for all model components apart from the ocean. The 3D ocean will run concurrently with =NTASKS_OCN=128= and =ROOTPE_OCN=720=.  This layout is contained in =~/models/cesm1_2_2_1/scripts/pes/a720o128n24.xml= on Cheyenne. In total, 848 processors will be used, spread across 24 nodes. The 4 nodes being used for the ocean model will have a number of idle processors due to contraints with the ocean processor layout.
 
 *** =user_nl_cam= files
-The =user_nl_cam= files will be pulled from GitHub using =wget=. In addition to specifying the emissions, the =user_nl_cam= files also specify the "offline" diagnostic radiation call used to calculate "clean-sky" fluxes:
+The =user_nl_cam= files will be pulled from GitHub using =wget=. In addition to specifying the emissions, the =user_nl_cam= files also specify that data for dynamical downscaling should be produced:
 
 #+BEGIN_SRC
-rad_diag_1 =
-        'A:Q:H2O', 'N:O2:O2', 'N:CO2:CO2', 'N:ozone:O3',
-        'N:N2O:N2O', 'N:CH4:CH4', 'N:CFC11:CFC11', 'N:CFC12:CFC12'
+fincl2 = 'PHIS:I','PS:I','PSL:I','Q:I','SST:I','T:I','TS:I','U:I','V:I','Z3:I'
+
+nhtfrq = 0, -6
+
+mfilt = 1, 1
 #+END_SRC
 
 *** Symbolic link to run directory
@@ -31,17 +33,17 @@ To facilitate ease of access to the run directory, I like to create a symbolic l
 *** Submission to the =economy= queue
 By default, my =.run= files are configured for submission to the =regular= queue. In order to submit to the =economy= queue, the =.run= file can be modified using =sed -i 's/regular/economy/g' $CASENAME.run=.
 
-** Creation, configuration, and submission of prescribed-SST (F) simulations
+** Creation, configuration, and submission of coupled atmosphere-ocean (B) simulations
 
 The source code blocks below are tangled using =C-c C-v t= in order to create bash scripts named =create_<CASENAME>.sh=.
 
-*** TODO =p17d_f_2000=
+*** TODO =p17d_b_2000=
 
-#+BEGIN_SRC :tangle yes :tangle create_p17d_f_2000.sh :shebang #!/bin/bash
-CASENAME=p17d_f_2000
+#+BEGIN_SRC :tangle yes :tangle create_p17d_b_2000.sh :shebang #!/bin/bash
+CASENAME=p17d_b_2000
 
 cd ~/models/cesm1_2_2_1/scripts/
-./create_newcase -case ~/cesm1_2_2_1_cases/$CASENAME -res f19_g16 -compset FC5 -mach cheyenne -pes_file pes/p720n20.xml
+./create_newcase -case ~/cesm1_2_2_1_cases/$CASENAME -res f19_g16 -compset BC5CN -mach cheyenne -pes_file pes/a720o128n24.xml
 
 cd ~/cesm1_2_2_1_cases/$CASENAME
 ./cesm_setup
@@ -50,21 +52,21 @@ mv user_nl_cam_$CASENAME user_nl_cam
 ./$CASENAME.build
 ln -s /glade/scratch/bgrandey/$CASENAME/run/ scratch_run
 ./xmlchange STOP_OPTION=nyears
-./xmlchange STOP_N=8
-./xmlchange RESUBMIT=3
+./xmlchange STOP_N=10
+./xmlchange RESUBMIT=9
 sed -i 's/regular/economy/g' $CASENAME.run
 ./$CASENAME.submit
 #+END_SRC
 
 Notes:
 
-*** TODO =p17d_f_eas0=
+*** TODO =p17d_b_eas0=
 
-#+BEGIN_SRC :tangle yes :tangle create_p17d_f_eas0.sh :shebang #!/bin/bash
-CASENAME=p17d_f_eas0
+#+BEGIN_SRC :tangle yes :tangle create_p17d_b_eas0.sh :shebang #!/bin/bash
+CASENAME=p17d_b_eas0
 
 cd ~/models/cesm1_2_2_1/scripts/
-./create_newcase -case ~/cesm1_2_2_1_cases/$CASENAME -res f19_g16 -compset FC5 -mach cheyenne -pes_file pes/p720n20.xml
+./create_newcase -case ~/cesm1_2_2_1_cases/$CASENAME -res f19_g16 -compset BC5CN -mach cheyenne -pes_file pes/a720o128n24.xml
 
 cd ~/cesm1_2_2_1_cases/$CASENAME
 ./cesm_setup
@@ -73,12 +75,14 @@ mv user_nl_cam_$CASENAME user_nl_cam
 ./$CASENAME.build
 ln -s /glade/scratch/bgrandey/$CASENAME/run/ scratch_run
 ./xmlchange STOP_OPTION=nyears
-./xmlchange STOP_N=8
-./xmlchange RESUBMIT=3
+./xmlchange STOP_N=10
+./xmlchange RESUBMIT=9
 sed -i 's/regular/economy/g' $CASENAME.run
 ./$CASENAME.submit
 #+END_SRC
 
 Notes:
-- Similar to =p17d_f_2000=, but with a different CASENAME (which determines the =user_nl_cam= file to be used).
+
+Notes:
+- Similar to =p17d_b_2000=, but with a different CASENAME (which determines the =user_nl_cam= file to be used).
 
