@@ -9,13 +9,13 @@ Investigate the *equilibrium* climate response to *sulphur* emissions from power
 
 *** Emissions scenarios
 Two emissions scenarios will be investigated:
-1. *=year-2000=*, which follows the default MAM3 emissions for the =F_2000_CAM5= (=FC5=) compset.
-2. *=eas0=*, which is similar to the above, but with no sulphur (SO2 and SO4) emissions from the energy and industry sectors over East and Southeast Asia (94E-161E, 10S-65N). The following emissions files will be modified: =ar5_mam3_so2_elev_2000_c090726.nc=, =ar5_mam3_so4_a1_elev_2000_c090726.nc=, and =ar5_mam3_num_a1_elev_2000_c090726.nc=.
+1. =year-2000=, which follows the default MAM3 emissions for the =F_2000_CAM5= (=FC5=) compset.
+2. =eas0=, which is similar to the above, but with no sulphur (SO2 and SO4) emissions from the energy and industry sectors over East and Southeast Asia (94E-161E, 10S-65N). The following emissions files will be modified: =ar5_mam3_so2_elev_2000_c090726.nc=, =ar5_mam3_so4_a1_elev_2000_c090726.nc=, and =ar5_mam3_num_a1_elev_2000_c090726.nc=.
 
 *** Prescribed-SST (F) simulations
 In order to quantify radiative effects, two prescribed-SST simulations will be performed:
-1. *=p17d_f_2000=*, which uses the *=year-2000=* emissions.
-2. *=p17d_f_eas0=*, which uses the *=eas0=* emissions.
+1. =p17d_f_2000=, which uses the =year-2000= emissions.
+2. =p17d_f_eas0=, which uses the =eas0= emissions.
 
 These prescribed-SST simulations will be configured as follows:
 1. Greenhouse gas concentrations and sea-surface temperatures (SSTs) will be prescribed using *year-2000 climatological values*, based on the =F_2000_CAM5= (=FC5=) [[http://www.cesm.ucar.edu/models/cesm1.2/cesm/doc/modelnl/compsets.html][compset]].
@@ -28,8 +28,8 @@ Details of the configuration can be found in [[https://github.com/grandey/p17d-s
 
 *** Equilibrium coupled atmosphere-ocean (B) simulations
 In order to investigate the equilibrium climate response, two coupled atmosphere-ocean simulations will be performed:
-1. *=p17d_b_2000=*, which uses the *=year-2000=* emissions.
-2. *=p17d_b_eas0=*, which uses the *=eas0=* emissions.
+1. =p17d_b_2000=, which uses the =year-2000= emissions.
+2. =p17d_b_eas0=, which uses the =eas0= emissions.
 
 These atmosphere-ocean simulations will be configured as follows:
 1. Greenhouse gas concentrations will be prescribed using *year-2000 climatological values*, based on the =B_2000_CAM5_CN= (=BC5CN=) [[http://www.cesm.ucar.edu/models/cesm1.2/cesm/doc/modelnl/compsets.html][compset]].
