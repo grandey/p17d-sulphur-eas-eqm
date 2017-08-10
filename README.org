@@ -1,0 +1,58 @@
+#+TITLE: p17d-sulphur-eas-eqm
+#+AUTHOR: Benjamin S. Grandey
+#+OPTIONS: ^:nil
+
+** Purpose
+Investigate the *equilibrium* climate response to *sulphur* emissions from power plants and industry in *East and Southeast Asia*, using CESM1.2.2(CAM5).
+
+** Experimental design
+
+*** Emissions scenarios
+Two emissions scenarios will be investigated:
+1. *=year-2000=*, which follows the default MAM3 emissions for the =F_2000_CAM5= (=FC5=) compset.
+2. *=eas0=*, which is similar to the above, but with no sulphur (SO2 and SO4) emissions from the energy and industry sectors over East and Southeast Asia (94E-161E, 10S-65N). The following emissions files will be modified: =ar5_mam3_so2_elev_2000_c090726.nc=, =ar5_mam3_so4_a1_elev_2000_c090726.nc=, and =ar5_mam3_num_a1_elev_2000_c090726.nc=.
+
+*** Prescribed-SST simulations
+In order to quantify radiative effects, two prescribed-SST simulations will be performed:
+1. *=p17d_f_2000=*, which uses the *=year-2000=* emissions.
+2. *=p17d_f_eas0=*, which uses the *=eas0=* emissions.
+
+These prescribed-SST simulations will be configured as follows:
+1. Greenhouse gas concentrations and sea-surface temperatures (SSTs) will be prescribed using *year-2000 climatological values*, based on the =F_2000_CAM5= (=FC5=) component set.
+2. The *RFP components* will be diagnosed following [[http://www.atmos-chem-phys.net/13/9971/2013/][Ghan (2013)]]. The "online" radiation call will include aerosol-radiation interactions; the "offline" diagnostic radiation call will calculate "clean-sky" fluxes.
+3. A resolution of *f19_g16* will be specified.
+4. Each simulation will be run for *32 years*, and the first two years will be excluded as spin-up. (Nudging will not be performed.)
+5. The simulations will be performed on *Cheyenne*, using 720 processors (20 nodes). Model throughput is expected to be approximately 39 years/day, with a cost of 440 pe-hrs/yr.
+
+*** Equilibrium coupled atmosphere-ocean simulations
+In order to investigate the equilibrium climate response, two coupled atmosphere-ocean simulations will be performed:
+1. *=p17d_b_2000=*, which uses the *=year-2000=* emissions.
+2. *=p17d_b_eas0=*, which uses the *=eas0=* emissions.
+
+These atmosphere-ocean simulations will be configured as follows:
+1. Greenhouse gas concentrations will be prescribed using *year-2000 climatological values*, based on the =B_2000_CAM5_CN= (=BC5CN=) compset.
+2. Data for *dynamical downscaling* will be produced.
+3. A resolution of *f19_g16* will be specified.
+4. Each simulation will be run for *100 years*, allowing several decades to be excluded as spin-up.
+5. The simulations will be performed on *Cheyenne*, using 128 processors for the ocean in addition to 720 processors for the other model components (24 nodes total). Model throughput is expected to be approximately 50 years/day, with a cost of 400 pe-hrs/yr.
+
+** Status
+
+*** Completed
+
+*** Still to-do
+***** TODO Prepare modified *emissions* for =eas0= scenario.
+***** TODO Design and check =user_nl_cam= files for *prescribed-SST* simulations
+***** TODO Design and check configuration of *prescribed-SST* simulations
+***** TODO Create and submit *prescribed-SST* simulations
+***** TODO Design and check =user_nl_cam= files for coupled *atmosphere-ocean* simulations
+***** TODO Design and check configuration of coupled *atmosphere-ocean* simulations
+***** TODO Create and submit coupled *atmosphere-ocean* simulations
+***** TODO Check and store copy of *output* from simulations
+
+** Author
+Benjamin S. Grandey, 2017, in collaboration with Yeo Lik Khian, Lee Hsiang-He, and [[http://web.mit.edu/wangc/][Chien Wang]].
+
+** Acknowledgements
+This repository has been developed in order to facilitate research conducted at the Singapore-MIT Alliance for Research and Technology (SMART), supported by the National Research Foundation (NRF), Prime Minister’s Office, Singapore under its Campus for Research Excellence and Technological Enterprise (CREATE) programme.
+
