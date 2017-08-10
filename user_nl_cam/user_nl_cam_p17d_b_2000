@@ -1,10 +1,10 @@
 ext_frc_specifier =
-        'SO2         -> /glade/p/work/bgrandey/input_data_p17c/so2_elev_p17d_eas0.nc',
+        'SO2         -> /glade/p/cesmdata/cseg/inputdata/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_so2_elev_2000_c090726.nc',
         'bc_a1       -> /glade/p/cesmdata/cseg/inputdata/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_bc_elev_2000_c090726.nc',
-        'num_a1      -> /glade/p/work/bgrandey/input_data_p17c/num_a1_elev_p17d_eas0.nc',
+        'num_a1      -> /glade/p/cesmdata/cseg/inputdata/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_num_a1_elev_2000_c090726.nc',
         'num_a2      -> /glade/p/cesmdata/cseg/inputdata/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_num_a2_elev_2000_c090726.nc',
         'pom_a1      -> /glade/p/cesmdata/cseg/inputdata/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_oc_elev_2000_c090726.nc',
-        'so4_a1      -> /glade/p/work/bgrandey/input_data_p17c/so4_a1_elev_p17d_eas0.nc',
+        'so4_a1      -> /glade/p/cesmdata/cseg/inputdata/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_so4_a1_elev_2000_c090726.nc',
         'so4_a2      -> /glade/p/cesmdata/cseg/inputdata/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_so4_a2_elev_2000_c090726.nc'
 
 ext_frc_type = 'CYCLICAL'
@@ -22,6 +22,9 @@ srf_emis_specifier =
 
 srf_emis_type = 'CYCLICAL'
 
-rad_diag_1 =
-        'A:Q:H2O', 'N:O2:O2', 'N:CO2:CO2', 'N:ozone:O3',
-        'N:N2O:N2O', 'N:CH4:CH4', 'N:CFC11:CFC11', 'N:CFC12:CFC12'
+fincl2 = 'PHIS:I','PS:I','PSL:I','Q:I','SST:I','T:I','TS:I','U:I','V:I','Z3:I'
+
+nhtfrq = 0, -6
+
+mfilt = 1, 4
+
