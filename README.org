@@ -43,12 +43,16 @@ Details of the configuration can be found in [[https://github.com/grandey/p17d-s
 ** Status
 
 *** Completed
+***** DONE Prepare modified *emissions* for =eas0= scenario.
+CLOSED: [2017-08-14 Mon 16:03]
+***** DONE Design and check =user_nl_cam= files for *prescribed-SST* simulations
+CLOSED: [2017-08-14 Mon 16:12]
+***** DONE Design and check configuration of *prescribed-SST* simulations
+CLOSED: [2017-08-14 Mon 16:17]
+***** DONE Create and submit *prescribed-SST* simulations
+CLOSED: [2017-08-14 Mon 16:42]
 
 *** Still to-do
-***** TODO Prepare modified *emissions* for =eas0= scenario.
-***** TODO Design and check =user_nl_cam= files for *prescribed-SST* simulations
-***** TODO Design and check configuration of *prescribed-SST* simulations
-***** TODO Create and submit *prescribed-SST* simulations
 ***** TODO Design and check =user_nl_cam= files for coupled *atmosphere-ocean* simulations
 ***** TODO Design and check configuration of coupled *atmosphere-ocean* simulations
 ***** TODO Create and submit coupled *atmosphere-ocean* simulations
