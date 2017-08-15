@@ -22,7 +22,7 @@ srf_emis_specifier =
 
 srf_emis_type = 'CYCLICAL'
 
-fincl2 = 'PHIS:I','PS:I','PSL:I','Q:I','SST:I','T:I','TS:I','U:I','V:I','Z3:I'
+fincl2 = 'PHIS:I','PS:I','PSL:I','Q:I','QREFHT:I','RHREFHT:I','SST:I','T:I','TREFHT:I','TS:I','U:I','V:I','Z3:I'
 
 nhtfrq = 0, -6
 

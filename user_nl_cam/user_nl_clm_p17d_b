@@ -1,0 +1,5 @@
+hist_fincl2 = 'TSOI_10CM:I', 'SOILWATER_10CM:I'
+
+hist_nhtfrq = 0, -6
+
+hist_mfilt = 1, 1

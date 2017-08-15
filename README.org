@@ -51,10 +51,12 @@ CLOSED: [2017-08-14 Mon 16:12]
 CLOSED: [2017-08-14 Mon 16:17]
 ***** DONE Create and submit *prescribed-SST* simulations
 CLOSED: [2017-08-14 Mon 16:42]
+***** DONE Design and check =user_nl_cam= files for coupled *atmosphere-ocean* simulations
+CLOSED: [2017-08-15 Tue 14:22]
+***** DONE Design and check configuration of coupled *atmosphere-ocean* simulations
+CLOSED: [2017-08-15 Tue 14:25]
 
 *** Still to-do
-***** TODO Design and check =user_nl_cam= files for coupled *atmosphere-ocean* simulations
-***** TODO Design and check configuration of coupled *atmosphere-ocean* simulations
 ***** TODO Create and submit coupled *atmosphere-ocean* simulations
 ***** TODO Check and store copy of *output* from simulations
 

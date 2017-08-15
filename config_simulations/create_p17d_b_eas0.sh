@@ -9,6 +9,8 @@ cd ~/cesm1_2_2_1_cases/$CASENAME
 ./cesm_setup
 wget https://raw.githubusercontent.com/grandey/p17d-sulphur-eas-eqm/master/user_nl_cam/user_nl_cam_$CASENAME
 mv user_nl_cam_$CASENAME user_nl_cam
+wget https://raw.githubusercontent.com/grandey/p17d-sulphur-eas-eqm/master/user_nl_cam/user_nl_clm_p17d_b
+mv user_nl_clm_p17d_b user_nl_clm
 ./$CASENAME.build
 ln -s /glade/scratch/bgrandey/$CASENAME/run/ scratch_run
 ./xmlchange STOP_OPTION=nyears

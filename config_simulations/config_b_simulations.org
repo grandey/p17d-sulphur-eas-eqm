@@ -20,11 +20,22 @@ The simulations will be configured with a layout of =NTASKS=720= for all model c
 The =user_nl_cam= files will be pulled from GitHub using =wget=. In addition to specifying the emissions, the =user_nl_cam= files also specify that data for dynamical downscaling should be produced:
 
 #+BEGIN_SRC
-fincl2 = 'PHIS:I','PS:I','PSL:I','Q:I','SST:I','T:I','TS:I','U:I','V:I','Z3:I'
+fincl2 = 'PHIS:I','PS:I','PSL:I','Q:I','QREFHT:I','RHREFHT:I','SST:I','T:I','TREFHT:I','TS:I','U:I','V:I','Z3:I'
 
 nhtfrq = 0, -6
 
 mfilt = 1, 1
+#+END_SRC
+
+*** =user_nl_clm= file
+The =user_nl_clm= file () will be pulled from GitHub using =wget=. This file specifies that 6 hour instantaneous soil temperature and water should be output, for use by WRF:
+
+#+BEGIN_SRC
+hist_fincl2 = 'TSOI_10CM:I', 'SOILWATER_10CM:I'
+
+hist_nhtfrq = 0, -6
+
+hist_mfilt = 1, 1
 #+END_SRC
 
 *** Symbolic link to run directory
@@ -49,6 +60,8 @@ cd ~/cesm1_2_2_1_cases/$CASENAME
 ./cesm_setup
 wget https://raw.githubusercontent.com/grandey/p17d-sulphur-eas-eqm/master/user_nl_cam/user_nl_cam_$CASENAME
 mv user_nl_cam_$CASENAME user_nl_cam
+wget https://raw.githubusercontent.com/grandey/p17d-sulphur-eas-eqm/master/user_nl_cam/user_nl_clm_p17d_b
+mv user_nl_clm_p17d_b user_nl_clm
 ./$CASENAME.build
 ln -s /glade/scratch/bgrandey/$CASENAME/run/ scratch_run
 ./xmlchange STOP_OPTION=nyears
@@ -72,6 +85,8 @@ cd ~/cesm1_2_2_1_cases/$CASENAME
 ./cesm_setup
 wget https://raw.githubusercontent.com/grandey/p17d-sulphur-eas-eqm/master/user_nl_cam/user_nl_cam_$CASENAME
 mv user_nl_cam_$CASENAME user_nl_cam
+wget https://raw.githubusercontent.com/grandey/p17d-sulphur-eas-eqm/master/user_nl_cam/user_nl_clm_p17d_b
+mv user_nl_clm_p17d_b user_nl_clm
 ./$CASENAME.build
 ln -s /glade/scratch/bgrandey/$CASENAME/run/ scratch_run
 ./xmlchange STOP_OPTION=nyears
