@@ -59,6 +59,7 @@ sed -i 's/regular/economy/g' $CASENAME.run
 
 Notes:
 - Case created, configured, built, and submitted on 2017-08-14.
+- Run failed with segmentation fault after 3rd start. Re-submitted.
 
 *** DONE =p17d_f_eas0=
 CLOSED: [2017-08-14 Mon 17:24]
