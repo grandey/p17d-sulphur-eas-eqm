@@ -48,7 +48,8 @@ By default, my =.run= files are configured for submission to the =regular= queue
 
 The source code blocks below are tangled using =C-c C-v t= in order to create bash scripts named =create_<CASENAME>.sh=.
 
-*** TODO =p17d_b_2000=
+*** DONE =p17d_b_2000=
+CLOSED: [2017-08-15 Tue 14:29]
 
 #+BEGIN_SRC :tangle yes :tangle create_p17d_b_2000.sh :shebang #!/bin/bash
 CASENAME=p17d_b_2000
@@ -72,8 +73,10 @@ sed -i 's/regular/economy/g' $CASENAME.run
 #+END_SRC
 
 Notes:
+- Case created, configured, built, and submitted on 2017-08-15.
 
-*** TODO =p17d_b_eas0=
+*** DONE =p17d_b_eas0=
+CLOSED: [2017-08-15 Tue 14:43]
 
 #+BEGIN_SRC :tangle yes :tangle create_p17d_b_eas0.sh :shebang #!/bin/bash
 CASENAME=p17d_b_eas0
@@ -100,4 +103,5 @@ Notes:
 
 Notes:
 - Similar to =p17d_b_2000=, but with a different CASENAME (which determines the =user_nl_cam= file to be used).
+- Case created, configured, built, and submitted on 2017-08-15.
 

@@ -55,9 +55,10 @@ CLOSED: [2017-08-14 Mon 16:42]
 CLOSED: [2017-08-15 Tue 14:22]
 ***** DONE Design and check configuration of coupled *atmosphere-ocean* simulations
 CLOSED: [2017-08-15 Tue 14:25]
+***** DONE Create and submit coupled *atmosphere-ocean* simulations
+CLOSED: [2017-08-15 Tue 14:44]
 
 *** Still to-do
-***** TODO Create and submit coupled *atmosphere-ocean* simulations
 ***** TODO Check and store copy of *output* from simulations
 
 ** Author
