@@ -22,7 +22,7 @@ These prescribed-SST simulations will be configured as follows:
 2. The *RFP components* will be diagnosed following [[http://www.atmos-chem-phys.net/13/9971/2013/][Ghan (2013)]]. The "online" radiation call will include aerosol-radiation interactions; the "offline" diagnostic radiation call will calculate "clean-sky" fluxes.
 3. A resolution of *f19_g16* will be specified.
 4. Each simulation will be run for *32 years*, and the first two years will be excluded as spin-up. (Nudging will not be performed.)
-5. The simulations will be performed on *Cheyenne*, using 720 processors (20 nodes). Model throughput is expected to be approximately 40 years/day, with a cost of 400 pe-hrs/yr.
+5. The simulations will be performed on *Cheyenne*, using 720 processors (20 nodes). Model throughput is approximately 47 years/day, with a cost of 360-370 pe-hrs/yr.
 
 Details of the configuration can be found in [[https://github.com/grandey/p17d-sulphur-eas-eqm/blob/master/config_simulations/config_f_simulations.org][config_f_simulations.org]].
 
@@ -36,9 +36,51 @@ These atmosphere-ocean simulations will be configured as follows:
 2. Data for *dynamical downscaling* will be produced.
 3. A resolution of *f19_g16* will be specified.
 4. Each simulation will be run for *100 years*, allowing several decades to be excluded as spin-up.
-5. The simulations will be performed on *Cheyenne*, using 128 processors for the ocean in addition to 720 processors for the other model components (24 nodes total). Model throughput is expected to be approximately 30 years/day, with a cost of approximately 600 pe-hrs/yr.
+5. The simulations will be performed on *Cheyenne*, using 128 processors for the ocean in addition to 720 processors for the other model components (24 nodes total). Model throughput is approximately 30 years/day, with a cost of 630-660 pe-hrs/yr.
 
 Details of the configuration can be found in [[https://github.com/grandey/p17d-sulphur-eas-eqm/blob/master/config_simulations/config_b_simulations.org][config_b_simulations.org]].
+
+** Data management
+
+*** Size of atmosphere-ocean (B) output
+Due to the large size of the atmospheric downscaling data and the ocean data, each coupled atmosphere-ocean simulation produces approximately 300 GB/decade (3 TB/century). Of this, approximately 120 GB is atmospheric downscaling data, 130 GB is monthly ocean data, and 50 GB is other data.
+
+By gzipping the data, the size of the atmospheric downscaling data files can be reduced by 15% and the monthly ocean data files by almost 60%. Hence, gzipping should reduce the overall data size to approximately 200 GB/decade (2 TB/century).
+
+In order to further reduce the storage requirements, the downscaling and ocean data from the first four decades can be deleted.
+
+*** Saving a copy of the output data to Newton
+On Cheyenne, a copy of the case directory for each simulation will be rsynced to the archive directory, e.g.:
+
+#+BEGIN_SRC
+CASENAME=p17d_f_2000
+ARCHIVE_DIR=/glade/scratch/bgrandey/archive
+rsync -av /glade/u/home/bgrandey/cesm1_2_2_1_cases/$CASENAME $ARCHIVE_DIR/$CASENAME/arch_case/
+#+END_SRC
+
+On Cheyenne, the NetCDF files in the archive directory will be gzipped:
+
+#+BEGIN_SRC
+for f in $ARCHIVE_DIR/$CASENAME/*/*/*.nc; do if [ -f $f ]; then echo "Gzipping $f"; gzip -f $f; fi; done
+#+END_SRC
+
+A copy of the data will then be rsynced from Cheyenne to Newton:
+
+#+BEGIN_SRC
+rsync -avz --progress -e "ssh -p $NEWTON_PORT" $ARCHIVE_DIR/$CASENAME $NEWTON_USER@$NEWTON_IP:/somerset/grandey/data4/acrc/RUN/archive/
+#+END_SRC
+
+Transfer speeds are approximately 0.5 MB/s (40 GB/day). The transfer can be sped up by running several rsync tasks concurrently, with each task transferring a subset of the data, e.g.:
+
+#+BEGIN_SRC
+rsync -avz --progress -e "ssh -p $NEWTON_PORT" $ARCHIVE_DIR/$CASENAME/atm/hist/$CASENAME.cam.h0.*.nc.gz $NEWTON_USER@$NEWTON_IP:/somerset/grandey/data4/acrc/RUN/archive/$CASENAME/atm/hist/
+
+rsync -avz --progress -e "ssh -p $NEWTON_PORT" $ARCHIVE_DIR/$CASENAME/atm/hist/$CASENAME.cam.h1.000?-*.nc.gz $NEWTON_USER@$NEWTON_IP:/somerset/grandey/data4/acrc/RUN/archive/$CASENAME/atm/hist/
+
+rsync -avz --progress -e "ssh -p $NEWTON_PORT" $ARCHIVE_DIR/$CASENAME/ocn/hist/$CASENAME.pop.h.*.nc.gz $NEWTON_USER@$NEWTON_IP:/somerset/grandey/data4/acrc/RUN/archive/$CASENAME/ocn/hist/
+
+for M in lnd ice rest; do echo $M; rsync -avz --progress -e "ssh -p $NEWTON_PORT" $ARCHIVE_DIR/$CASENAME/$M/hist/$CASENAME.*.nc.gz $NEWTON_USER@$NEWTON_IP:/somerset/grandey/data4/acrc/RUN/archive/$CASENAME/$M/hist/; done
+#+END_SRC
 
 ** Status
 
@@ -57,9 +99,11 @@ CLOSED: [2017-08-15 Tue 14:22]
 CLOSED: [2017-08-15 Tue 14:25]
 ***** DONE Create and submit coupled *atmosphere-ocean* simulations
 CLOSED: [2017-08-15 Tue 14:44]
+***** DONE Archive copy of *prescribed-SST output* to Newton
+CLOSED: [2017-08-16 Wed 10:40]
 
 *** Still to-do
-***** TODO Check and store copy of *output* from simulations
+***** TODO Archive copy of coupled *atmosphere-ocean output* to Newton
 
 ** Author
 Benjamin S. Grandey, 2017, in collaboration with Yeo Lik Khian, Lee Hsiang-He, and [[http://web.mit.edu/wangc/][Chien Wang]].
