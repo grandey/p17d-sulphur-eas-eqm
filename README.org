@@ -47,7 +47,7 @@ Due to the large size of the atmospheric downscaling data and the ocean data, ea
 
 By gzipping the data, the size of the atmospheric downscaling data files can be reduced by 15% and the monthly ocean data files by almost 60%. Hence, gzipping should reduce the overall data size to approximately 200 GB/decade (2 TB/century).
 
-In order to further reduce the storage requirements, the downscaling and ocean data from the first four decades can be deleted.
+In order to further reduce the storage requirements, the downscaling and ocean data from the first four decades can be deleted (see below).
 
 *** Saving a copy of the output data to Newton
 On Cheyenne, a copy of the case directory for each simulation will be rsynced to the archive directory, e.g.:
@@ -64,6 +64,13 @@ On Cheyenne, the NetCDF files in the archive directory will be gzipped:
 for f in $ARCHIVE_DIR/$CASENAME/*/*/*.nc; do if [ -f $f ]; then echo "Gzipping $f"; gzip -f $f; fi; done
 #+END_SRC
 
+Atmospheric downscaling and monthly ocean data from the first four decades (actually 39 years) can be deleted:
+
+#+BEGIN_SRC
+rm -f $ARCHIVE_DIR/$CASENAME/atm/hist/$CASENAME.cam.h1.00[0123]?-*.nc.gz
+rm -f $ARCHIVE_DIR/$CASENAME/ocn/hist/$CASENAME.pop.h.00[0123]?-*.nc.gz
+#+END_SRC
+
 A copy of the data will then be rsynced from Cheyenne to Newton:
 
 #+BEGIN_SRC
@@ -75,11 +82,13 @@ Transfer speeds are approximately 0.5 MB/s (40 GB/day). The transfer can be sped
 #+BEGIN_SRC
 rsync -avz --progress -e "ssh -p $NEWTON_PORT" $ARCHIVE_DIR/$CASENAME/atm/hist/$CASENAME.cam.h0.*.nc.gz $NEWTON_USER@$NEWTON_IP:/somerset/grandey/data4/acrc/RUN/archive/$CASENAME/atm/hist/
 
-rsync -avz --progress -e "ssh -p $NEWTON_PORT" $ARCHIVE_DIR/$CASENAME/atm/hist/$CASENAME.cam.h1.000?-*.nc.gz $NEWTON_USER@$NEWTON_IP:/somerset/grandey/data4/acrc/RUN/archive/$CASENAME/atm/hist/
+rsync -avz --progress -e "ssh -p $NEWTON_PORT" $ARCHIVE_DIR/$CASENAME/atm/hist/$CASENAME.cam.h1.0???-0[123]-*.nc.gz $NEWTON_USER@$NEWTON_IP:/somerset/grandey/data4/acrc/RUN/archive/$CASENAME/atm/hist/
 
-rsync -avz --progress -e "ssh -p $NEWTON_PORT" $ARCHIVE_DIR/$CASENAME/ocn/hist/$CASENAME.pop.h.*.nc.gz $NEWTON_USER@$NEWTON_IP:/somerset/grandey/data4/acrc/RUN/archive/$CASENAME/ocn/hist/
+rsync -avz --progress -e "ssh -p $NEWTON_PORT" $ARCHIVE_DIR/$CASENAME/ocn/hist/$CASENAME.pop.h.nday1.*.nc.gz $NEWTON_USER@$NEWTON_IP:/somerset/grandey/data4/acrc/RUN/archive/$CASENAME/ocn/hist/
 
-for M in lnd ice rest; do echo $M; rsync -avz --progress -e "ssh -p $NEWTON_PORT" $ARCHIVE_DIR/$CASENAME/$M/hist/$CASENAME.*.nc.gz $NEWTON_USER@$NEWTON_IP:/somerset/grandey/data4/acrc/RUN/archive/$CASENAME/$M/hist/; done
+rsync -avz --progress -e "ssh -p $NEWTON_PORT" $ARCHIVE_DIR/$CASENAME/ocn/hist/$CASENAME.pop.h.0???-0[123].nc.gz $NEWTON_USER@$NEWTON_IP:/somerset/grandey/data4/acrc/RUN/archive/$CASENAME/ocn/hist/
+
+for M in lnd ice; do echo $M; rsync -avz --progress -e "ssh -p $NEWTON_PORT" $ARCHIVE_DIR/$CASENAME/$M/hist/$CASENAME.*.nc.gz $NEWTON_USER@$NEWTON_IP:/somerset/grandey/data4/acrc/RUN/archive/$CASENAME/$M/hist/; done
 #+END_SRC
 
 ** Status
