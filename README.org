@@ -117,7 +117,7 @@ CLOSED: [2017-08-21 Mon 11:54]
 
 *** Still to-do
 ***** TODO Preliminary analysis of prescribed-SST simulations
-***** TODO Preliminary analysis of coupled atmospher-ocean simulations
+***** TODO Preliminary analysis of coupled atmosphere-ocean simulations
 
 ** Author
 Benjamin S. Grandey, 2017, in collaboration with Yeo Lik Khian, Lee Hsiang-He, and [[http://web.mit.edu/wangc/][Chien Wang]].
