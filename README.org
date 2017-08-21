@@ -91,6 +91,68 @@ rsync -avz --progress -e "ssh -p $NEWTON_PORT" $ARCHIVE_DIR/$CASENAME/ocn/hist/$
 for M in lnd ice; do echo $M; rsync -avz --progress -e "ssh -p $NEWTON_PORT" $ARCHIVE_DIR/$CASENAME/$M/hist/$CASENAME.*.nc.gz $NEWTON_USER@$NEWTON_IP:/somerset/grandey/data4/acrc/RUN/archive/$CASENAME/$M/hist/; done
 #+END_SRC
 
+*** Converting from time-slice to time-series format
+After gunzipping a copy of the atmospheric h0 files on Newton, [[https://github.com/NCAR/PyReshaper][PyReshaper]] (v1.0.1) can be used to convert to time-series format. I have =PyReshaper= installed in a separate =conda= environment:
+
+#+BEGIN_SRC
+source activate pyreshaper
+#+END_SRC
+
+First, =s2make= is used to generate a specifier file, e.g.:
+
+#+BEGIN_SRC
+CASENAME=p17d_f_2000
+
+IN_DIR=/somerset/grandey/data4/acrc/RUN/unzipped/$CASENAME/atm/hist
+OUT_DIR=/dhobyghaut/grandey/data5/cesm/s2s/$CASENAME/atm
+
+mkdir -p $OUT_DIR
+
+s2smake \
+    --netcdf_format="netcdf4" \
+    --compression_level=1 \
+    --output_prefix="$OUT_DIR/$CASENAME.cam.h0." \
+    --output_suffix=".nc" \
+    -m "time" -m "time_bnds" -m "ch4vmr" -m "co2vmr" -m "f11vmr" \
+    -m "time_written" -m "n2ovmr" -m "date_written" -m "f12vmr" \
+    -m "sol_tsi" -m "nsteph" -m "datesec" -m "ndcur" -m "date" \
+    -m "nscur" \
+    --specfile=$OUT_DIR/specfile_$CASENAME.s2s \
+    $IN_DIR/$CASENAME.cam.h0.????-??.nc
+#+END_SRC
+
+(The metadata field information (indicated by =m=) has been copied from some example code Daniel Rothenberg kindly provided.)
+
+Second, =s2run= is run in parallel in order to convert the data to time-series format:
+
+#+BEGIN_SRC
+mpirun -n 8 s2srun --verbosity=2 $OUT_DIR/specfile_$CASENAME.s2s
+#+END_SRC
+
+** Syncing to local machine for analysis
+Data of interest can then be pulled from Newton using rsync.
+
+Prescribed-SST radiation data:
+
+#+BEGIN_SRC
+CASENAME_LIST="p17d_f_2000 p17d_f_eas0"
+VARIABLE_LIST="FSNTOA FSNTOA_d1 FSNTOAC_d1 SWCF_d1 LWCF LWCF_d1"
+#+END_SRC
+
+Rsync command:
+
+#+BEGIN_SRC
+for CASENAME in $CASENAME_LIST
+do
+  for VARIABLE in $VARIABLE_LIST
+  do
+    rsync -av --progress -e "ssh -p $NEWTON_PORT" \
+        $NEWTON_USER@$NEWTON_IP:/dhobyghaut/grandey/data5/cesm/s2s/$CASENAME/atm/$CASENAME.cam.h0.$VARIABLE.nc \
+        $HOME/data/projects/p17d_sulphur_eas_eqm/output_timeseries/
+  done
+done
+#+END_SRC
+
 ** Status
 
 *** Completed
@@ -114,10 +176,13 @@ CLOSED: [2017-08-16 Wed 10:40]
 CLOSED: [2017-08-21 Mon 14:06]
 ***** DONE Check that no downscaling data files are missing on Newton 
 CLOSED: [2017-08-21 Mon 11:54]
+***** DONE AMWG diagnostics for prescribed-SST simulations
+CLOSED: [2017-08-21 Mon 15:55]
+***** DONE AMWG diagnostics for coupled atmosphere-ocean simulations
+CLOSED: [2017-08-21 Mon 15:55]
 
 *** Still to-do
-***** TODO Preliminary analysis of prescribed-SST simulations
-***** TODO Preliminary analysis of coupled atmosphere-ocean simulations
+***** TODO Convert atm h0 data from simulations to time-series format on Newton
 
 ** Author
 Benjamin S. Grandey, 2017, in collaboration with Yeo Lik Khian, Lee Hsiang-He, and [[http://web.mit.edu/wangc/][Chien Wang]].
