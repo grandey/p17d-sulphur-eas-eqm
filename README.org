@@ -110,9 +110,14 @@ CLOSED: [2017-08-15 Tue 14:25]
 CLOSED: [2017-08-15 Tue 14:44]
 ***** DONE Archive copy of *prescribed-SST output* to Newton
 CLOSED: [2017-08-16 Wed 10:40]
+***** DONE Archive copy of coupled *atmosphere-ocean output* to Newton
+CLOSED: [2017-08-21 Mon 14:06]
+***** DONE Check that no downscaling data files are missing on Newton 
+CLOSED: [2017-08-21 Mon 11:54]
 
 *** Still to-do
-***** TODO Archive copy of coupled *atmosphere-ocean output* to Newton
+***** TODO Preliminary analysis of prescribed-SST simulations
+***** TODO Preliminary analysis of coupled atmospher-ocean simulations
 
 ** Author
 Benjamin S. Grandey, 2017, in collaboration with Yeo Lik Khian, Lee Hsiang-He, and [[http://web.mit.edu/wangc/][Chien Wang]].
