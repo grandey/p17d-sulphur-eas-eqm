@@ -198,9 +198,15 @@ CLOSED: [2017-08-21 Mon 17:56]
 CLOSED: [2017-08-21 Mon 18:06]
 ***** DONE Design and check configuration of p17d_f_eas0b and p17d_b_eas0b
 CLOSED: [2017-08-21 Mon 18:10]
+***** DONE Create and submit p17d_f_eas0b and p17d_b_eas0b
+CLOSED: [2017-08-21 Mon 20:25]
 
 *** Still to-do
-***** TODO Create and submit p17d_f_eas0b and p17d_b_eas0b
+***** TODO Archive copy of p17d_f_eas0b and p17d_f_eas0b to Newton
+***** TODO Check that no downscaling data files are missing from p17d_b_eas0 on Newton
+***** TODO Update AMWG diagnostics, including using year-2000 scenario as test case (not cntl)
+***** TODO Convert atm h0 data from p17d_f_eas0b and p17d_b_eas0b to time-series format on Newton
+***** TODO Continue preliminary analysis
 
 ** Author
 Benjamin S. Grandey, 2017, in collaboration with Yeo Lik Khian, Lee Hsiang-He, and [[http://web.mit.edu/wangc/][Chien Wang]].

@@ -88,7 +88,8 @@ Notes:
 - Case initially created, configured, built, and submitted on 2017-08-14, but failed due to =user_nl_cam_p17d_f_eas0= pointing to incorrect folder. Cleaning case and scratch directories following failure.
 - After correcting bug in =user_nl_cam_p17d_f_eas0=, created, configured, built, and submitted again on 2017-08-14.
 
-*** TODO =p17d_f_eas0b=
+*** DONE =p17d_f_eas0b=
+CLOSED: [2017-08-21 Mon 20:23]
 
 #+BEGIN_SRC :tangle yes :tangle create_p17d_f_eas0b.sh :shebang #!/bin/bash
 CASENAME=p17d_f_eas0b
@@ -111,3 +112,4 @@ sed -i 's/regular/economy/g' $CASENAME.run
 
 Notes:
 - Similar to simulations above, but with a different CASENAME (which determines the =user_nl_cam= file to be used).
+- Case created, configured, built, and submitted on 2017-08-21.

@@ -105,7 +105,8 @@ Notes:
 - Similar to =p17d_b_2000=, but with a different CASENAME (which determines the =user_nl_cam= file to be used).
 - Case created, configured, built, and submitted on 2017-08-15.
 
-*** TODO =p17d_b_eas0b=
+*** DONE =p17d_b_eas0b=
+CLOSED: [2017-08-21 Mon 20:24]
 
 #+BEGIN_SRC :tangle yes :tangle create_p17d_b_eas0b.sh :shebang #!/bin/bash
 CASENAME=p17d_b_eas0b
@@ -132,4 +133,4 @@ Notes:
 
 Notes:
 - Similar to simulations above, but with a different CASENAME (which determines the =user_nl_cam= file to be used).
-
+- Case created, configured, built, and submitted on 2017-08-21.
