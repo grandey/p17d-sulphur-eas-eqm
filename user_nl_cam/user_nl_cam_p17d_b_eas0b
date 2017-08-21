@@ -1,0 +1,30 @@
+ext_frc_specifier =
+        'SO2         -> /glade/p/work/bgrandey/input_data_p17d/so2_elev_p17d_eas0b.nc',
+        'bc_a1       -> /glade/p/cesmdata/cseg/inputdata/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_bc_elev_2000_c090726.nc',
+        'num_a1      -> /glade/p/work/bgrandey/input_data_p17d/num_a1_elev_p17d_eas0b.nc',
+        'num_a2      -> /glade/p/work/bgrandey/input_data_p17d/num_a2_elev_p17d_eas0b.nc',
+        'pom_a1      -> /glade/p/cesmdata/cseg/inputdata/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_oc_elev_2000_c090726.nc',
+        'so4_a1      -> /glade/p/work/bgrandey/input_data_p17d/so4_a1_elev_p17d_eas0b.nc',
+        'so4_a2      -> /glade/p/work/bgrandey/input_data_p17d/so4_a2_elev_p17d_eas0b.nc'
+
+ext_frc_type = 'CYCLICAL'
+
+srf_emis_specifier =
+        'DMS       -> /glade/p/cesmdata/cseg/inputdata/atm/cam/chem/trop_mozart_aero/emis/aerocom_mam3_dms_surf_2000_c090129.nc',
+        'SO2       -> /glade/p/work/bgrandey/input_data_p17d/so2_surf_p17d_eas0b.nc',
+        'SOAG      -> /glade/p/cesmdata/cseg/inputdata/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_soag_1.5_surf_2000_c100217.nc',
+        'bc_a1     -> /glade/p/cesmdata/cseg/inputdata/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_bc_surf_2000_c090726.nc',
+        'num_a1    -> /glade/p/work/bgrandey/input_data_p17d/num_a1_surf_p17d_eas0b.nc',
+        'num_a2    -> /glade/p/work/bgrandey/input_data_p17d/num_a2_surf_p17d_eas0b.nc',
+        'pom_a1    -> /glade/p/cesmdata/cseg/inputdata/atm/cam/chem/trop_mozart_aero/emis/ar5_mam3_oc_surf_2000_c090726.nc',
+        'so4_a1    -> /glade/p/work/bgrandey/input_data_p17d/so4_a1_surf_p17d_eas0b.nc',
+        'so4_a2    -> /glade/p/work/bgrandey/input_data_p17d/so4_a2_surf_p17d_eas0b.nc'
+
+srf_emis_type = 'CYCLICAL'
+
+fincl2 = 'PHIS:I','PS:I','PSL:I','Q:I','QREFHT:I','RHREFHT:I','SST:I','T:I','TREFHT:I','TS:I','U:I','V:I','Z3:I'
+
+nhtfrq = 0, -6
+
+mfilt = 1, 1
+

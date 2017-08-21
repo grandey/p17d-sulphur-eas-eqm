@@ -187,9 +187,10 @@ CLOSED: [2017-08-21 Mon 15:55]
 CLOSED: [2017-08-21 Mon 17:56]
 ***** DONE Prepare modified emissions for =eas0b= scenario
 CLOSED: [2017-08-21 Mon 17:56]
+***** DONE Design and check =user_nl_cam= files for p17d_f_eas0b and p17d_b_eas0b
+CLOSED: [2017-08-21 Mon 18:06]
 
 *** Still to-do
-***** TODO Design and check =user_nl_cam= files for p17d_f_eas0b and p17d_b_eas0b
 ***** TODO Design and check configuration of p17d_f_eas0b and p17d_b_eas0b
 ***** TODO Create and submit p17d_f_eas0b and p17d_b_eas0b
 
