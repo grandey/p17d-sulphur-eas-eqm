@@ -105,3 +105,31 @@ Notes:
 - Similar to =p17d_b_2000=, but with a different CASENAME (which determines the =user_nl_cam= file to be used).
 - Case created, configured, built, and submitted on 2017-08-15.
 
+*** TODO =p17d_b_eas0b=
+
+#+BEGIN_SRC :tangle yes :tangle create_p17d_b_eas0b.sh :shebang #!/bin/bash
+CASENAME=p17d_b_eas0b
+
+cd ~/models/cesm1_2_2_1/scripts/
+./create_newcase -case ~/cesm1_2_2_1_cases/$CASENAME -res f19_g16 -compset BC5CN -mach cheyenne -pes_file pes/a720o128n24.xml
+
+cd ~/cesm1_2_2_1_cases/$CASENAME
+./cesm_setup
+wget https://raw.githubusercontent.com/grandey/p17d-sulphur-eas-eqm/master/user_nl_cam/user_nl_cam_$CASENAME
+mv user_nl_cam_$CASENAME user_nl_cam
+wget https://raw.githubusercontent.com/grandey/p17d-sulphur-eas-eqm/master/user_nl_cam/user_nl_clm_p17d_b
+mv user_nl_clm_p17d_b user_nl_clm
+./$CASENAME.build
+ln -s /glade/scratch/bgrandey/$CASENAME/run/ scratch_run
+./xmlchange STOP_OPTION=nyears
+./xmlchange STOP_N=10
+./xmlchange RESUBMIT=9
+sed -i 's/regular/economy/g' $CASENAME.run
+./$CASENAME.submit
+#+END_SRC
+
+Notes:
+
+Notes:
+- Similar to simulations above, but with a different CASENAME (which determines the =user_nl_cam= file to be used).
+
