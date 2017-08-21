@@ -11,7 +11,7 @@ Investigate the *equilibrium* climate response to *sulphur* emissions from *East
 Three emissions scenarios are considered:
 1. =year-2000=, which follows the default MAM3 emissions for the =F_2000_CAM5= (=FC5=) compset.
 2. =eas0=, which is similar to the above, but with no sulphur (SO2 and SO4) emissions from the *energy* and *industry* sectors over East and Southeast Asia (94E-161E, 10S-65N). The following emissions files are modified: =ar5_mam3_so2_elev_2000_c090726.nc=, =ar5_mam3_so4_a1_elev_2000_c090726.nc=, and =ar5_mam3_num_a1_elev_2000_c090726.nc=.
-3. =eas0b=, which is similar to the two scenarios above, but with *no anthropogenic* sulphur (SO2 and SO4) emissions from East and Southeast Asia (94E-161E, 10S-65N). Even shipping emissions over this region will be removed. The following emissions files are modified: =ar5_mam3_so2_elev_2000_c090726.nc=, =ar5_mam3_so4_a1_elev_2000_c090726.nc=, =ar5_mam3_num_a1_elev_2000_c090726.nc=, =ar5_mam3_so2_surf_2000_c090726.nc=, =ar5_mam3_so4_a1_surf_2000_c090726.nc=, =ar5_mam3_num_a1_surf_2000_c090726.nc=, =ar5_mam3_so4_a2_surf_2000_c090726.nc=, and =ar5_mam3_num_a2_surf_2000_c090726.nc=.
+3. =eas0b=, which is similar to the two scenarios above, but with no *anthropogenic* sulphur (SO2 and SO4) emissions from East and Southeast Asia (94E-161E, 10S-65N). Even shipping emissions over this region are removed. The following emissions files are modified: =ar5_mam3_so2_elev_2000_c090726.nc=, =ar5_mam3_so4_a1_elev_2000_c090726.nc=, =ar5_mam3_num_a1_elev_2000_c090726.nc=, =ar5_mam3_so2_surf_2000_c090726.nc=, =ar5_mam3_so4_a1_surf_2000_c090726.nc=, =ar5_mam3_num_a1_surf_2000_c090726.nc=, =ar5_mam3_so4_a2_surf_2000_c090726.nc=, and =ar5_mam3_num_a2_surf_2000_c090726.nc=.
 
 *** Prescribed-SST (F) simulations
 In order to quantify radiative effects, two prescribed-SST simulations are performed:
@@ -159,7 +159,7 @@ done
 ** Status
 
 *** Completed
-***** DONE Prepare modified emissions for =eas0= scenario.
+***** DONE Prepare modified emissions for =eas0= scenario
 CLOSED: [2017-08-14 Mon 16:03]
 ***** DONE Design and check =user_nl_cam= files for p17d_f_2000 and p17d_f_eas0
 CLOSED: [2017-08-14 Mon 16:12]
@@ -183,10 +183,12 @@ CLOSED: [2017-08-21 Mon 11:54]
 CLOSED: [2017-08-21 Mon 15:55]
 ***** DONE AMWG diagnostics for p17d_f_eas0-p17d_f_2000
 CLOSED: [2017-08-21 Mon 15:55]
+***** DONE Convert atm h0 data from p17d_f_2000, p17d_f_eas0, p17d_b_2000, and p17d_b_eas0 to time-series format on Newton
+CLOSED: [2017-08-21 Mon 17:56]
+***** DONE Prepare modified emissions for =eas0b= scenario
+CLOSED: [2017-08-21 Mon 17:56]
 
 *** Still to-do
-***** TODO Convert atm h0 data from p17d_f_2000, p17d_f_eas0, p17d_b_2000, and p17d_b_eas0 to time-series format on Newton
-***** TODO Prepare modified emissions for =easb= scenario.
 ***** TODO Design and check =user_nl_cam= files for p17d_f_eas0b and p17d_b_eas0b
 ***** TODO Design and check configuration of p17d_f_eas0b and p17d_b_eas0b
 ***** TODO Create and submit p17d_f_eas0b and p17d_b_eas0b
