@@ -133,8 +133,8 @@ Notes:
 - Similar to simulations above, but with a different CASENAME (which determines the =user_nl_cam= file to be used).
 - Case created, configured, built, and submitted on 2017-08-21.
 
-
-*** TODO =p17d_b_eas0c=
+*** DONE =p17d_b_eas0c=
+CLOSED: [2017-08-23 Wed 15:40]
 
 #+BEGIN_SRC :tangle yes :tangle create_p17d_b_eas0c.sh :shebang #!/bin/bash
 CASENAME=p17d_b_eas0c
@@ -159,4 +159,5 @@ sed -i 's/regular/economy/g' $CASENAME.run
 
 Notes:
 - Similar to simulations above, but with a different CASENAME (which determines the =user_nl_cam= file to be used).
+- Case created, configured, built, and submitted on 2017-08-23.
 

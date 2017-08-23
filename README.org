@@ -8,7 +8,7 @@ Investigate the *equilibrium* climate response to *sulphur* emissions from *East
 ** Experimental design
 
 *** Emissions scenarios
-Three emissions scenarios are considered:
+Four emissions scenarios are considered:
 1. =year-2000=, which follows the default MAM3 emissions for the =F_2000_CAM5= (=FC5=) compset.
 2. =eas0=, which is similar to the above, but with no sulphur (SO2 and SO4) emissions from the *energy* and *industry* sectors over East and Southeast Asia (94E-161E, 10S-65N).
 3. =eas0b=, which is similar to the two scenarios above, but with no *anthropogenic* sulphur (SO2 and SO4) emissions from East and Southeast Asia (94E-161E, 10S-65N). Even shipping emissions over this region are removed.
@@ -214,12 +214,13 @@ CLOSED: [2017-08-23 Wed 15:21]
 CLOSED: [2017-08-23 Wed 15:21]
 ***** DONE Design and check configuration of =p17d_f_eas0c= and =p17d_b_eas0c=
 CLOSED: [2017-08-23 Wed 15:32]
+***** DONE Create and submit =p17d_f_eas0c= and =p17d_b_eas0c=
+CLOSED: [2017-08-23 Wed 15:38]
 
 *** Still to-do
-***** TODO Create and submit =p17d_f_eas0c= and =p17d_b_eas0c=
 ***** TODO Archive copy of =p17d_f_eas0c=, =p17d_b_eas0b=, and =p17d_b_eas0c= data to Newton
-***** TODO Convert atm h0 data from =p17d_f_eas0c=, =p17d_b_eas0b=, and =p17d_b_eas0c= to time-series format on Newton
 ***** TODO Check that no downscaling data files are missing from =p17d_b_eas0b= and =p17d_b_eas0c= on Newton
+***** TODO Convert atm h0 data from =p17d_f_eas0c=, =p17d_b_eas0b=, and =p17d_b_eas0c= to time-series format on Newton
 ***** TODO Continue preliminary analysis
 ***** TODO Update AMWG diagnostics, including using year-2000 scenario as test case (not cntl)
 
