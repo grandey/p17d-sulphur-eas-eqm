@@ -67,10 +67,11 @@ On Cheyenne, the NetCDF files in the archive directory will be gzipped:
 for f in $ARCHIVE_DIR/$CASENAME/*/*/*.nc; do if [ -f $f ]; then echo "Gzipping $f"; gzip -f $f; fi; done
 #+END_SRC
 
-Atmospheric downscaling and monthly ocean data from the first four decades (actually 39 years) can be deleted:
+For the atmosphere-ocean simulations, the downscaling and monthly ocean data from the first four decades (actually 39 years) can be deleted:
 
 #+BEGIN_SRC
 rm -f $ARCHIVE_DIR/$CASENAME/atm/hist/$CASENAME.cam.h1.00[0123]?-*.nc.gz
+rm -f $ARCHIVE_DIR/$CASENAME/lnd/hist/$CASENAME.clm2.h1.00[0123]?-*.nc.gz
 rm -f $ARCHIVE_DIR/$CASENAME/ocn/hist/$CASENAME.pop.h.00[0123]?-*.nc.gz
 #+END_SRC
 
@@ -138,14 +139,14 @@ Data of interest can then be pulled from Newton using rsync.
 Prescribed-SST simulation data of interest:
 
 #+BEGIN_SRC
-CASENAME_LIST="p17d_f_2000 p17d_f_eas0"
+CASENAME_LIST="p17d_f_2000 p17d_f_eas0 p17d_f_eas0b"
 VARIABLE_LIST="FSNTOA FSNTOA_d1 FSNTOAC_d1 SWCF_d1 LWCF LWCF_d1 H2SO4_SRF"
 #+END_SRC
 
 Coupled atmosphere-ocean simulation data of interest:
 
 #+BEGIN_SRC
-CASENAME_LIST="p17d_b_2000 p17d_b_eas0"
+CASENAME_LIST="p17d_b_2000 p17d_b_eas0 p17d_b_eas0b"
 VARIABLE_LIST="TS PRECC PRECL H2SO4_SRF"
 #+END_SRC
 
@@ -200,13 +201,17 @@ CLOSED: [2017-08-21 Mon 18:06]
 CLOSED: [2017-08-21 Mon 18:10]
 ***** DONE Create and submit p17d_f_eas0b and p17d_b_eas0b
 CLOSED: [2017-08-21 Mon 20:25]
+***** DONE Archive copy of p17d_f_eas0b data to Newton
+CLOSED: [2017-08-22 Tue 14:53]
+***** DONE Convert atm h0 data from p17d_f_eas0b to time-series format on Newton
+CLOSED: [2017-08-22 Tue 18:01]
 
 *** Still to-do
-***** TODO Archive copy of p17d_f_eas0b and p17d_f_eas0b to Newton
+***** TODO Archive copy of p17d_b_eas0b data to Newton
 ***** TODO Check that no downscaling data files are missing from p17d_b_eas0 on Newton
-***** TODO Update AMWG diagnostics, including using year-2000 scenario as test case (not cntl)
-***** TODO Convert atm h0 data from p17d_f_eas0b and p17d_b_eas0b to time-series format on Newton
+***** TODO Convert atm h0 data from p17d_b_eas0b to time-series format on Newton
 ***** TODO Continue preliminary analysis
+***** TODO Update AMWG diagnostics, including using year-2000 scenario as test case (not cntl)
 
 ** Author
 Benjamin S. Grandey, 2017, in collaboration with Yeo Lik Khian, Lee Hsiang-He, and [[http://web.mit.edu/wangc/][Chien Wang]].
