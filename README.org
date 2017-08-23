@@ -10,14 +10,16 @@ Investigate the *equilibrium* climate response to *sulphur* emissions from *East
 *** Emissions scenarios
 Three emissions scenarios are considered:
 1. =year-2000=, which follows the default MAM3 emissions for the =F_2000_CAM5= (=FC5=) compset.
-2. =eas0=, which is similar to the above, but with no sulphur (SO2 and SO4) emissions from the *energy* and *industry* sectors over East and Southeast Asia (94E-161E, 10S-65N). The following emissions files are modified: =ar5_mam3_so2_elev_2000_c090726.nc=, =ar5_mam3_so4_a1_elev_2000_c090726.nc=, and =ar5_mam3_num_a1_elev_2000_c090726.nc=.
-3. =eas0b=, which is similar to the two scenarios above, but with no *anthropogenic* sulphur (SO2 and SO4) emissions from East and Southeast Asia (94E-161E, 10S-65N). Even shipping emissions over this region are removed. The following emissions files are modified: =ar5_mam3_so2_elev_2000_c090726.nc=, =ar5_mam3_so4_a1_elev_2000_c090726.nc=, =ar5_mam3_num_a1_elev_2000_c090726.nc=, =ar5_mam3_so2_surf_2000_c090726.nc=, =ar5_mam3_so4_a1_surf_2000_c090726.nc=, =ar5_mam3_num_a1_surf_2000_c090726.nc=, =ar5_mam3_so4_a2_surf_2000_c090726.nc=, and =ar5_mam3_num_a2_surf_2000_c090726.nc=.
+2. =eas0=, which is similar to the above, but with no sulphur (SO2 and SO4) emissions from the *energy* and *industry* sectors over East and Southeast Asia (94E-161E, 10S-65N).
+3. =eas0b=, which is similar to the two scenarios above, but with no *anthropogenic* sulphur (SO2 and SO4) emissions from East and Southeast Asia (94E-161E, 10S-65N). Even shipping emissions over this region are removed.
+4.  =eas0c=, which is similar to the three scenarios above, but with no *anthropogenic aerosol* (SO2, SO4, organic carbon, black carbon) emissions from East and Southeast Asia (94E-161E, 10S-65N). As with =eas0b=, shipping emissions over this region are removed.
 
 *** Prescribed-SST (F) simulations
-In order to quantify radiative effects, two prescribed-SST simulations are performed:
+In order to quantify radiative effects, four prescribed-SST simulations are performed:
 1. =p17d_f_2000=, which uses the =year-2000= emissions.
 2. =p17d_f_eas0=, which uses the =eas0= emissions.
 3. =p17d_f_eas0b=, which uses the =eas0b= emissions.
+4. =p17d_f_eas0c=, which uses the =eas0c= emissions.
 
 These prescribed-SST simulations are configured as follows:
 1. Greenhouse gas concentrations and sea-surface temperatures (SSTs) are prescribed using *year-2000 climatological values*, based on the =F_2000_CAM5= (=FC5=) [[http://www.cesm.ucar.edu/models/cesm1.2/cesm/doc/modelnl/compsets.html][compset]].
@@ -29,10 +31,11 @@ These prescribed-SST simulations are configured as follows:
 Details of the configuration can be found in [[https://github.com/grandey/p17d-sulphur-eas-eqm/blob/master/config_simulations/config_f_simulations.org][config_f_simulations.org]].
 
 *** Equilibrium coupled atmosphere-ocean (B) simulations
-In order to investigate the equilibrium climate response, two coupled atmosphere-ocean simulations are performed:
+In order to investigate the equilibrium climate response, four coupled atmosphere-ocean simulations are performed:
 1. =p17d_b_2000=, which uses the =year-2000= emissions.
 2. =p17d_b_eas0=, which uses the =eas0= emissions.
 3. =p17d_b_eas0b=, which uses the =eas0b= emissions.
+4. =p17d_b_eas0c=, which uses the =eas0c= emissions.
 
 These atmosphere-ocean simulations are configured as follows:
 1. Greenhouse gas concentrations are prescribed using *year-2000 climatological values*, based on the =B_2000_CAM5_CN= (=BC5CN=) [[http://www.cesm.ucar.edu/models/cesm1.2/cesm/doc/modelnl/compsets.html][compset]].
@@ -169,47 +172,54 @@ done
 *** Completed
 ***** DONE Prepare modified emissions for =eas0= scenario
 CLOSED: [2017-08-14 Mon 16:03]
-***** DONE Design and check =user_nl_cam= files for p17d_f_2000 and p17d_f_eas0
+***** DONE Design and check =user_nl_cam= files for =p17d_f_2000= and =p17d_f_eas0=
 CLOSED: [2017-08-14 Mon 16:12]
-***** DONE Design and check configuration of p17d_f_2000 and p17d_f_eas0
+***** DONE Design and check configuration of =p17d_f_2000= and =p17d_f_eas0=
 CLOSED: [2017-08-14 Mon 16:17]
-***** DONE Create and submit p17d_f_2000 and p17d_f_eas0
+***** DONE Create and submit =p17d_f_2000= and =p17d_f_eas0=
 CLOSED: [2017-08-14 Mon 16:42]
-***** DONE Design and check =user_nl_cam= files for p17d_b_2000 and p17d_b_eas0
+***** DONE Design and check =user_nl_cam= files for =p17d_b_2000= and =p17d_b_eas0=
 CLOSED: [2017-08-15 Tue 14:22]
-***** DONE Design and check configuration of p17d_b_2000 and p17d_b_eas0
+***** DONE Design and check configuration of =p17d_b_2000= and =p17d_b_eas0=
 CLOSED: [2017-08-15 Tue 14:25]
-***** DONE Create and submit p17d_b_2000 and p17d_b_eas0
+***** DONE Create and submit =p17d_b_2000= and =p17d_b_eas0=
 CLOSED: [2017-08-15 Tue 14:44]
-***** DONE Archive copy of p17d_f_2000 and p17d_f_eas0 to Newton
+***** DONE Archive copy of =p17d_f_2000= and =p17d_f_eas0= to Newton
 CLOSED: [2017-08-16 Wed 10:40]
-***** DONE Archive copy of coupled p17d_b_2000 and p17d_b_eas0 to Newton
+***** DONE Archive copy of coupled =p17d_b_2000= and =p17d_b_eas0= to Newton
 CLOSED: [2017-08-21 Mon 14:06]
-***** DONE Check that no downscaling data files are missing from p17d_b_2000 and p17d_b_eas0 on Newton 
+***** DONE Check that no downscaling data files are missing from =p17d_b_2000= and =p17d_b_eas0= on Newton 
 CLOSED: [2017-08-21 Mon 11:54]
-***** DONE AMWG diagnostics for p17d_b_eas0-p17d_b_2000
+***** DONE AMWG diagnostics for =p17d_b_eas0-p17d_b_2000=
 CLOSED: [2017-08-21 Mon 15:55]
-***** DONE AMWG diagnostics for p17d_f_eas0-p17d_f_2000
+***** DONE AMWG diagnostics for =p17d_f_eas0-p17d_f_2000=
 CLOSED: [2017-08-21 Mon 15:55]
-***** DONE Convert atm h0 data from p17d_f_2000, p17d_f_eas0, p17d_b_2000, and p17d_b_eas0 to time-series format on Newton
+***** DONE Convert atm h0 data from =p17d_f_2000=, =p17d_f_eas0=, =p17d_b_2000=, and =p17d_b_eas0= to time-series format on Newton
 CLOSED: [2017-08-21 Mon 17:56]
 ***** DONE Prepare modified emissions for =eas0b= scenario
 CLOSED: [2017-08-21 Mon 17:56]
-***** DONE Design and check =user_nl_cam= files for p17d_f_eas0b and p17d_b_eas0b
+***** DONE Design and check =user_nl_cam= files for =p17d_f_eas0b= and =p17d_b_eas0b=
 CLOSED: [2017-08-21 Mon 18:06]
-***** DONE Design and check configuration of p17d_f_eas0b and p17d_b_eas0b
+***** DONE Design and check configuration of =p17d_f_eas0b= and =p17d_b_eas0b=
 CLOSED: [2017-08-21 Mon 18:10]
-***** DONE Create and submit p17d_f_eas0b and p17d_b_eas0b
+***** DONE Create and submit =p17d_f_eas0b= and =p17d_b_eas0b=
 CLOSED: [2017-08-21 Mon 20:25]
-***** DONE Archive copy of p17d_f_eas0b data to Newton
+***** DONE Archive copy of =p17d_f_eas0b= data to Newton
 CLOSED: [2017-08-22 Tue 14:53]
-***** DONE Convert atm h0 data from p17d_f_eas0b to time-series format on Newton
+***** DONE Convert atm h0 data from =p17d_f_eas0b= to time-series format on Newton
 CLOSED: [2017-08-22 Tue 18:01]
+***** DONE Prepare modified emissions for =eas0c= scenario
+CLOSED: [2017-08-23 Wed 15:21]
+***** DONE Design and check =user_nl_cam= files for =p17d_f_eas0c= and =p17d_b_eas0c=
+CLOSED: [2017-08-23 Wed 15:21]
+***** DONE Design and check configuration of =p17d_f_eas0c= and =p17d_b_eas0c=
+CLOSED: [2017-08-23 Wed 15:32]
 
 *** Still to-do
-***** TODO Archive copy of p17d_b_eas0b data to Newton
-***** TODO Check that no downscaling data files are missing from p17d_b_eas0 on Newton
-***** TODO Convert atm h0 data from p17d_b_eas0b to time-series format on Newton
+***** TODO Create and submit =p17d_f_eas0c= and =p17d_b_eas0c=
+***** TODO Archive copy of =p17d_f_eas0c=, =p17d_b_eas0b=, and =p17d_b_eas0c= data to Newton
+***** TODO Convert atm h0 data from =p17d_f_eas0c=, =p17d_b_eas0b=, and =p17d_b_eas0c= to time-series format on Newton
+***** TODO Check that no downscaling data files are missing from =p17d_b_eas0b= and =p17d_b_eas0c= on Newton
 ***** TODO Continue preliminary analysis
 ***** TODO Update AMWG diagnostics, including using year-2000 scenario as test case (not cntl)
 
