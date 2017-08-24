@@ -142,14 +142,14 @@ Data of interest can then be pulled from Newton using rsync.
 Prescribed-SST simulation data of interest:
 
 #+BEGIN_SRC
-CASENAME_LIST="p17d_f_2000 p17d_f_eas0 p17d_f_eas0b"
-VARIABLE_LIST="FSNTOA FSNTOA_d1 FSNTOAC_d1 SWCF_d1 LWCF LWCF_d1 H2SO4_SRF"
+CASENAME_LIST="p17d_f_2000 p17d_f_eas0 p17d_f_eas0b p17d_f_eas0c"
+VARIABLE_LIST="FSNTOA FSNTOA_d1 FSNTOAC_d1 SWCF_d1 LWCF LWCF_d1 H2SO4_SRF BURDENSO4"
 #+END_SRC
 
 Coupled atmosphere-ocean simulation data of interest:
 
 #+BEGIN_SRC
-CASENAME_LIST="p17d_b_2000 p17d_b_eas0 p17d_b_eas0b"
+CASENAME_LIST="p17d_b_2000 p17d_b_eas0 p17d_b_eas0b p17d_b_eas0c"
 VARIABLE_LIST="TS PRECC PRECL H2SO4_SRF"
 #+END_SRC
 

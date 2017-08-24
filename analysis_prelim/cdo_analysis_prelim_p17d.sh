@@ -36,7 +36,7 @@ done
 CASENAME1="p17d_f_2000"
 VARIABLE_LIST="FSNTOA FSNTOA_d1 FSNTOAC_d1 SWCF_d1 LWCF LWCF_d1 H2SO4_SRF"
 
-for CASENAME2 in p17d_f_eas0 p17d_f_eas0b
+for CASENAME2 in p17d_f_eas0 p17d_f_eas0b p17d_f_eas0c
 do
     for VARIABLE in $VARIABLE_LIST
     do
@@ -50,8 +50,7 @@ done
 # 2b. Derived fields
 # Net RFP
 CASENAME1="p17d_f_2000"
-
-for CASENAME2 in p17d_f_eas0 p17d_f_eas0b
+for CASENAME2 in p17d_f_eas0 p17d_f_eas0b p17d_f_eas0c
 do
     IN_FILE1="$OUT_DIR/s2.tm.$CASENAME1-$CASENAME2.cam.h0.FSNTOA.nc"
     IN_FILE2="$OUT_DIR/s2.tm.$CASENAME1-$CASENAME2.cam.h0.LWCF_d1.nc"
@@ -72,26 +71,31 @@ done
 # 3. Atmosphere-ocean simulation differences
 # 3a. 2D fields
 CASENAME1="p17d_b_2000"
-CASENAME2="p17d_b_eas0"
 VARIABLE_LIST="TS PRECC PRECL H2SO4_SRF"
-
-for VARIABLE in $VARIABLE_LIST
+for CASENAME2 in p17d_b_eas0 p17d_b_eas0b p17d_b_eas0c
 do
-    IN_FILE1="$OUT_DIR/s1.tm.$CASENAME1.cam.h0.$VARIABLE.nc"
-    IN_FILE2="$OUT_DIR/s1.tm.$CASENAME2.cam.h0.$VARIABLE.nc"
-    OUT_FILE="$OUT_DIR/s3.tm.$CASENAME1-$CASENAME2.cam.h0.$VARIABLE.nc"
-    cdo sub $IN_FILE1 $IN_FILE2 $OUT_FILE
+    for VARIABLE in $VARIABLE_LIST
+    do
+	IN_FILE1="$OUT_DIR/s1.tm.$CASENAME1.cam.h0.$VARIABLE.nc"
+	IN_FILE2="$OUT_DIR/s1.tm.$CASENAME2.cam.h0.$VARIABLE.nc"
+	OUT_FILE="$OUT_DIR/s3.tm.$CASENAME1-$CASENAME2.cam.h0.$VARIABLE.nc"
+	cdo sub $IN_FILE1 $IN_FILE2 $OUT_FILE
+    done
 done
 
 # 3b. Derived fields
 # Total precipitation
-IN_FILE1="$OUT_DIR/s3.tm.p17d_b_2000-p17d_b_eas0.cam.h0.PRECC.nc"
-IN_FILE2="$OUT_DIR/s3.tm.p17d_b_2000-p17d_b_eas0.cam.h0.PRECL.nc"
-TEMP_FILE="$OUT_DIR/temp.nc"
-OUT_FILE="$OUT_DIR/s3.tm.p17d_b_2000-p17d_b_eas0.cam.h0.cPRECT.nc"
-cdo merge $IN_FILE1 $IN_FILE2 $TEMP_FILE
-cdo expr,'cPRECT=PRECC+PRECL' $TEMP_FILE $OUT_FILE
-rm -f $TEMP_FILE
+CASENAME1="p17d_b_2000"
+for CASENAME2 in p17d_f_eas0 p17d_f_eas0b p17d_f_eas0c
+do
+    IN_FILE1="$OUT_DIR/s3.tm.$CASENAME1-$CASENAME2.cam.h0.PRECC.nc"
+    IN_FILE2="$OUT_DIR/s3.tm.$CASENAME1-$CASENAME2.cam.h0.PRECL.nc"
+    TEMP_FILE="$OUT_DIR/temp.nc"
+    OUT_FILE="$OUT_DIR/s3.tm.$CASENAME1-$CASENAME2.cam.h0.cPRECT.nc"
+    cdo merge $IN_FILE1 $IN_FILE2 $TEMP_FILE
+    cdo expr,'cPRECT=PRECC+PRECL' $TEMP_FILE $OUT_FILE
+    rm -f $TEMP_FILE
+done
 
 # 3c. Area-weighted means
 for IN_FILE in $OUT_DIR/s3.*.nc
