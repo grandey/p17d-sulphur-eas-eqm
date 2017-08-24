@@ -132,6 +132,8 @@ sed -i 's/regular/economy/g' $CASENAME.run
 Notes:
 - Similar to simulations above, but with a different CASENAME (which determines the =user_nl_cam= file to be used).
 - Case created, configured, built, and submitted on 2017-08-21.
+- Case resubmitted on 2017-08-23 following spurious failure during 7th decade (60s).
+- Case resubmitted on 2017-08-24 following spurious failure during 8th decade (70s).
 
 *** DONE =p17d_b_eas0c=
 CLOSED: [2017-08-23 Wed 15:40]
