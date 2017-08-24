@@ -216,11 +216,13 @@ CLOSED: [2017-08-23 Wed 15:21]
 CLOSED: [2017-08-23 Wed 15:32]
 ***** DONE Create and submit =p17d_f_eas0c= and =p17d_b_eas0c=
 CLOSED: [2017-08-23 Wed 15:38]
+***** DONE Archive copy of =p17d_f_eas0c= to Newton, and convert atm h0 data to time-series format on Newton
+CLOSED: [2017-08-24 Thu 13:19]
 
 *** Still to-do
-***** TODO Archive copy of =p17d_f_eas0c=, =p17d_b_eas0b=, and =p17d_b_eas0c= data to Newton
+***** TODO Archive copy of =p17d_b_eas0b= and =p17d_b_eas0c= data to Newton
 ***** TODO Check that no downscaling data files are missing from =p17d_b_eas0b= and =p17d_b_eas0c= on Newton
-***** TODO Convert atm h0 data from =p17d_f_eas0c=, =p17d_b_eas0b=, and =p17d_b_eas0c= to time-series format on Newton
+***** TODO Convert atm h0 data from =p17d_b_eas0b= and =p17d_b_eas0c= to time-series format on Newton
 ***** TODO Continue preliminary analysis
 ***** TODO Update AMWG diagnostics, including using year-2000 scenario as test case (not cntl)
 
