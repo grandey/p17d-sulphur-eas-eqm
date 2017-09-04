@@ -86,7 +86,7 @@ done
 # 3b. Derived fields
 # Total precipitation
 CASENAME1="p17d_b_2000"
-for CASENAME2 in p17d_f_eas0 p17d_f_eas0b p17d_f_eas0c
+for CASENAME2 in p17d_b_eas0 p17d_b_eas0b p17d_b_eas0c
 do
     IN_FILE1="$OUT_DIR/s3.tm.$CASENAME1-$CASENAME2.cam.h0.PRECC.nc"
     IN_FILE2="$OUT_DIR/s3.tm.$CASENAME1-$CASENAME2.cam.h0.PRECL.nc"
