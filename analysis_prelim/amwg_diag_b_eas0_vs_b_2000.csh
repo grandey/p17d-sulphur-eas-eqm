@@ -209,19 +209,19 @@ set weight_months = 1     # (0=ON,1=OFF)
 # Select the diagnostic sets to be done. You can do one at a
 # time or as many as you want at one time, or all at once.
 
-set all_sets = 0  # (0=ON,1=OFF)  Do all the CAM sets (1-16)
+set all_sets = 1  # (0=ON,1=OFF)  Do all the CAM sets (1-16)
 set set_1  = 0    # (0=ON,1=OFF)  tables of global,regional means
 set set_2  = 1    # (0=ON,1=OFF)  implied transport plots 
-set set_3  = 1    # (0=ON,1=OFF)  zonal mean line plots
-set set_4  = 1    # (0=ON,1=OFF)  vertical zonal mean contour plots
-set set_4a = 1    # (0=ON,1=OFF)  vertical zonal mean contour plots
-set set_5  = 1    # (0=ON,1=OFF)  2D-field contour plots
-set set_6  = 1    # (0=ON,1=OFF)  2D-field vector plots
-set set_7  = 1    # (0=ON,1=OFF)  2D-field polar plots
-set set_8  = 1    # (0=ON,1=OFF)  annual cycle (vs lat) contour plots
-set set_9  = 1    # (0=ON,1=OFF)  DJF-JJA difference plots
-set set_10 = 1    # (0=ON,1=OFF)  annual cycle line plots    
-set set_11 = 1    # (0=ON,1=OFF)  miscellaneous plots
+set set_3  = 0    # (0=ON,1=OFF)  zonal mean line plots
+set set_4  = 0    # (0=ON,1=OFF)  vertical zonal mean contour plots
+set set_4a = 0    # (0=ON,1=OFF)  vertical zonal mean contour plots
+set set_5  = 0    # (0=ON,1=OFF)  2D-field contour plots
+set set_6  = 0    # (0=ON,1=OFF)  2D-field vector plots
+set set_7  = 0    # (0=ON,1=OFF)  2D-field polar plots
+set set_8  = 0    # (0=ON,1=OFF)  annual cycle (vs lat) contour plots
+set set_9  = 0    # (0=ON,1=OFF)  DJF-JJA difference plots
+set set_10 = 0    # (0=ON,1=OFF)  annual cycle line plots    
+set set_11 = 0    # (0=ON,1=OFF)  miscellaneous plots
 set set_12 = 1    # (0=selected stations: 1=NONE, 2=ALL stations
 set set_13 = 1    # (0=ON,1=OFF)  COSP cloud simulator plots
 set set_14 = 1    # (0=ON,1=OFF)  Taylor diagram plots 

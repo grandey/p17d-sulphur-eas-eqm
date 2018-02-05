@@ -226,8 +226,6 @@ CLOSED: [2017-09-21 Thu 17:12]
 CLOSED: [2017-09-19 Tue 12:09]
 
 *** Still to-do
-***** TODO Continue preliminary analysis
-***** TODO Update AMWG diagnostics, including using year-2000 scenario as test case (not cntl)
 
 ** Author
 Benjamin S. Grandey, 2017, in collaboration with Yeo Lik Khian, Lee Hsiang-He, and [[http://web.mit.edu/wangc/][Chien Wang]].
