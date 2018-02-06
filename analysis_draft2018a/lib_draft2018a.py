@@ -21,6 +21,7 @@ Author:
 import climapy  # https://doi.org/10.5281/zenodo.1053020
 import os
 import pandas as pd
+import re
 import xarray as xr
 
 
@@ -51,7 +52,7 @@ def load_region_bounds_dict():
     region_bounds_dict = {'ESEAs': [(94, 161), (-10, 65)],  # modified emissions regions
                           'EAs': [(100, 130), (20, 45)],  # as in Grandey et al. (2016)
                           'SAs': [(65, 90), (5, 30)],
-                          'Aus': [(120, 155), (10, 45)],
+                          'Aus': [(110, 155), (-45, -10)],
                           'Sah': [(-20, 10), (10, 20)],
                           'NH': [None, (0, 90)],
                           'SH': [None, (-90, 0)],
@@ -124,7 +125,7 @@ def load_variable_units_dict():
                            'FSNTOA-FSNTOA_d1': r'W m$^{-2}$',
                            'FSNTOAC_d1': r'W m$^{-2}$',
                            'TS': r'$^{circ}$C',
-                           'PRECC+PRECL': r'mm year^{-1}'}
+                           'PRECC+PRECL': r'mm year$^{-1}$'}
     return variable_units_dict
 
 
@@ -178,12 +179,10 @@ def load_emissions(species='so2', surf_or_elev='both', scenario='eas0c', season=
         try:  # if emissions modified use modified emissions...
             filename = '{}/{}_{}_p17d_{}.nc'.format(p17d_emis_dir, species, surf_or_elev, scenario)
             ds = xr.open_dataset(filename, decode_times=False, drop_variables=['date', ])
-            print(filename)
         except FileNotFoundError:  # ... otherwise use default MAM3 emissions
             filename = '{}/ar5_mam3_{}_{}_2000_c090726.nc'.format(mam_emis_dir, species,
                                                                   surf_or_elev, scenario)
             ds = xr.open_dataset(filename, decode_times=False, drop_variables=['date', ])
-            print(filename)
         # If emissions are 3D, convert to 2D
         if surf_or_elev == 'elev':
             alt_deltas = (ds['altitude_int'].values[1:] -
@@ -210,14 +209,14 @@ def load_emissions(species='so2', surf_or_elev='both', scenario='eas0c', season=
     return data
 
 
-def load_output(variable, scenario='eas0c', f_or_b='B', season='annual', apply_sf=True):
+def load_output(variable='TS', scenario='eas0c', f_or_b='b', season='annual', apply_sf=True):
     """
     Load annual/seasonal data for a specific variable and scenario.
 
     Args:
-        variable: string of variable name to load (e.g. 'SWCF_d1')
+        variable: string of variable name to load (default 'TS')
         scenario: string scenario name (default 'eas0c')
-        f_or_b: 'F' (prescribed-SST) or 'B' (coupled atmosphere-ocean; only)
+        f_or_b: 'f' (prescribed-SST) or 'b' (coupled atmosphere-ocean; only)
         season: 'annual' (default) or name of season (e.g 'DJF')
         apply_sf: apply scale factor? (default True)
 
@@ -226,7 +225,7 @@ def load_output(variable, scenario='eas0c', f_or_b='B', season='annual', apply_s
     """
     # If + or - in variable, call function recursively
     if '+' in variable or '-' in variable:
-        variable1, variable2 = variable.split('+').split('-')
+        variable1, variable2 = re.split('[+\-]', variable)
         data1 = load_output(variable1, scenario=scenario, f_or_b=f_or_b, season=season,
                             apply_sf=apply_sf)
         data2 = load_output(variable2, scenario=scenario, f_or_b=f_or_b, season=season,
@@ -248,9 +247,9 @@ def load_output(variable, scenario='eas0c', f_or_b='B', season='annual', apply_s
             data = ds[variable].where(ds['time.season'] == season,
                                       drop=True).groupby('time.year').mean(dim='time')
         # Discard spin-up
-        if f_or_b == 'F':  # discard two years for 'F' simulations
+        if f_or_b == 'f':  # discard two years for 'f' simulations
             data = data.where(data['year'] >= 1703, drop=True)
-        elif f_or_b == 'B':  # discard 40 years for 'B' simulations
+        elif f_or_b == 'b':  # discard 40 years for 'b' simulations
             data = data.where(data['year'] >= 1741, drop=True)
     # Apply scale factor?
     if apply_sf:
@@ -270,7 +269,7 @@ def load_landfrac():
         xarray DataArray
     """
     # Read data
-    in_filename = '{}/LANDFRAC/p16a_F_Hist_2000.cam.h0.LANDFRAC.nc'.format(output_dir)
+    in_filename = '{}/LANDFRAC/p17d_f_000.cam.h0.LANDFRAC.nc'.format(output_dir)
     ds = xr.open_dataset(in_filename, decode_times=False)
     # Convert time coordinates
     ds = climapy.cesm_time_from_bnds(ds, min_year=1701)
