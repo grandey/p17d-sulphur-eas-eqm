@@ -124,7 +124,7 @@ def load_variable_units_dict():
                            'LWCF': r'W m$^{-2}$',
                            'FSNTOA-FSNTOA_d1': r'W m$^{-2}$',
                            'FSNTOAC_d1': r'W m$^{-2}$',
-                           'TS': r'$^{circ}$C',
+                           'TS': r'$^\{circ}$C',
                            'PRECC+PRECL': r'mm year$^{-1}$'}
     return variable_units_dict
 
