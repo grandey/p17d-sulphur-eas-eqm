@@ -260,6 +260,60 @@ def load_output(variable='TS', scenario='eas0c', f_or_b='b', season='annual', ap
     return data
 
 
+def load_output_monthly(variable='TS', scenario='eas0c', f_or_b='b', apply_sf=True):
+    """
+    Load monthly data for a specific variable and scenario.
+
+    Args:
+        variable: string of variable name to load (default 'TS')
+        scenario: string scenario name (default 'eas0c')
+        f_or_b: 'f' (prescribed-SST) or 'b' (coupled atmosphere-ocean; only)
+        apply_sf: apply scale factor? (default True)
+
+    Returns:
+        xarray DataArray
+    """
+    # If + or - in variable, call function recursively
+    if '+' in variable or '-' in variable:
+        variable1, variable2 = re.split('[+\-]', variable)
+        data1 = load_output_monthly(variable1, scenario=scenario, f_or_b=f_or_b,
+                                    apply_sf=apply_sf)
+        data2 = load_output_monthly(variable2, scenario=scenario, f_or_b=f_or_b,
+                                    apply_sf=apply_sf)
+        if '+' in variable:
+            data = data1 + data2
+        elif '-' in variable:
+            data = data1 - data2
+    else:
+        # Read data
+        in_filename = '{}/p17d_{}_{}.cam.h0.{}.nc'.format(output_dir, f_or_b, scenario, variable)
+        ds = xr.open_dataset(in_filename, decode_times=False)
+        # Convert time coordinates
+        ds = climapy.cesm_time_from_bnds(ds, min_year=1701)
+        # Select variable
+        data = ds[variable]
+        # Split time into seperate year and month dimensions
+        d_list = []
+        for m in range(1, 13):  # loop over months
+            d = data.where(data['time.month'] == m,
+                           drop=True).groupby('time.year').mean(dim='time')
+            d['month'] = m  # add month coordinate
+            d_list.append(d)
+        data = xr.concat(d_list, dim='month')
+        # Discard spin-up
+        if f_or_b == 'f':  # discard two years for 'f' simulations
+            data = data.where(data['year'] >= 1703, drop=True)
+        elif f_or_b == 'b':  # discard 40 years for 'b' simulations
+            data = data.where(data['year'] >= 1741, drop=True)
+    # Apply scale factor?
+    if apply_sf:
+        try:
+            data = data * load_variable_sf_dict()[variable]
+        except KeyError:
+            pass
+    return data
+
+
 def load_landfrac():
     """
     Load land fraction (LANDFRAC).
