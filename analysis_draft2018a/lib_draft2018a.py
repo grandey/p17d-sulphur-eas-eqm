@@ -97,7 +97,11 @@ def load_variable_long_dict():
                           'FSNTOA-FSNTOA_d1': r'$\Delta$ direct radiative effect',
                           'FSNTOAC_d1': r'$\Delta$ surface albedo radiative effect',
                           'TS': r'$\Delta$ surface temperature',
-                          'PRECC+PRECL': r'$\Delta$ total precipitation rate'}
+                          'PRECC+PRECL': r'$\Delta$ total precipitation rate',
+                          'OMEGA_ml19': r'$\Delta$ vertical velocity at level $19$ ' +
+                                        '($\approx 525$hPa})',
+                          'U_ml27': r'$\Delta$ zonal wind at level $27$ ($\approx 936$hPa})'
+                          }
     return variable_long_dict
 
 
@@ -111,7 +115,10 @@ def load_variable_symbol_dict():
                             'FSNTOA-FSNTOA_d1': r'$\Delta DRE_\mathrm{SW}$',
                             'FSNTOAC_d1': r'$\Delta SRE_\mathrm{SW}$',
                             'TS': r'$\Delta T$',
-                            'PRECC+PRECL': r'$\Delta R$'}
+                            'PRECC+PRECL': r'$\Delta R$',
+                            'OMEGA_ml19': r'$\Delta \omega$',
+                            'U_ml27': r'$\Delta u$',
+                            }
     return variable_symbol_dict
 
 
@@ -125,7 +132,10 @@ def load_variable_units_dict():
                            'FSNTOA-FSNTOA_d1': r'W m$^{-2}$',
                            'FSNTOAC_d1': r'W m$^{-2}$',
                            'TS': r'$^{\circ}$C',
-                           'PRECC+PRECL': r'mm year$^{-1}$'}
+                           'PRECC+PRECL': r'mm year$^{-1}$',
+                           'OMEGA_ml19': r'$\times 10^{-3}$ Pa s$^{-1}$',
+                           'U_ml27': r'm s$^{-1}$',
+                           }
     return variable_units_dict
 
 
@@ -133,7 +143,8 @@ def load_variable_sf_dict():
     """
     Load dictionary containing scale-factors to apply to variables.
     """
-    variable_sf_dict = {'PRECC+PRECL': 1e3*60*60*24*365  # m/s -> mm/year
+    variable_sf_dict = {'PRECC+PRECL': 1e3*60*60*24*365,  # m/s -> mm/year
+                        'OMEGA_ml19': 1000,  # Pa/s -> mPa/s
                         }
     return variable_sf_dict
 
