@@ -54,6 +54,7 @@ def load_region_bounds_dict():
                           'SAs': [(65, 90), (5, 30)],
                           'Aus': [(110, 155), (-45, -10)],
                           'Sah': [(-20, 10), (10, 20)],
+                          'WAWJ': [(-25, -15), (8.4, 10.6)],
                           'NH': [None, (0, 90)],
                           'SH': [None, (-90, 0)],
                           'Globe': [None, None]}
@@ -69,6 +70,7 @@ def load_region_long_dict():
                         'SAs': 'South Asia',
                         'Aus': 'Australia',
                         'Sah': 'Sahel',
+                        'WAWJ': 'West African Westerly Jet',
                         'NH': 'Northern Hemisphere',
                         'SH': 'Southern Hemisphere',
                         'Globe': 'globe'}
