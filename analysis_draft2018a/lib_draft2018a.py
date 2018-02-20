@@ -111,7 +111,7 @@ def load_variable_symbol_dict():
     """
     Load dictionary containing variable symbols, for differences between scenarios.
     """
-    variable_symbol_dict = {'FSNTOA+LWCF': r'$ERF_\mathrm{SW+LW}$',
+    variable_symbol_dict = {'FSNTOA+LWCF': r'$\Delta ERF_\mathrm{SW+LW}$',
                             'SWCF_d1': r'$\Delta CRE_\mathrm{SW}$',
                             'LWCF': r'$\Delta CRE_\mathrm{LW}$',
                             'FSNTOA-FSNTOA_d1': r'$\Delta DRE_\mathrm{SW}$',
