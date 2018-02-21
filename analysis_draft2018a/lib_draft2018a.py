@@ -82,9 +82,8 @@ def load_scenario_name_dict():
     Load dictionary containing scenarios and the names used to refer to the scenarios.
     """
     scenario_name_dict = {'2000': 'Ref',
-                          'eas0': 'Exp1',
-                          'eas0b': 'Exp2',
-                          'eas0c': 'Exp3'}
+                          'eas0b': 'Exp1',
+                          'eas0c': 'Exp2'}
     return scenario_name_dict
 
 
