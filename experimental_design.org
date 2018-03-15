@@ -1,0 +1,50 @@
+#+TITLE: p17d-sulphur-eas-eqm/experimental_design.org
+#+AUTHOR: Benjamin S. Grandey
+#+OPTIONS: ^:nil
+
+The contents of this file were originally included in README.org.
+
+** Purpose
+Investigate the *equilibrium* climate response to *sulphur* emissions from *East and Southeast Asia*, using CESM1.2.2(CAM5).
+
+** Experimental design
+
+*** Emissions scenarios
+Four emissions scenarios are considered:
+1. =year-2000=, which follows the default MAM3 emissions for the =F_2000_CAM5= (=FC5=) compset.
+2. =eas0=, which is similar to the above, but with no sulphur (SO2 and SO4) emissions from the *energy* and *industry* sectors over East and Southeast Asia (94E-161E, 10S-65N).
+3. =eas0b=, which is similar to the two scenarios above, but with no *anthropogenic* sulphur (SO2 and SO4) emissions from East and Southeast Asia (94E-161E, 10S-65N). Even shipping emissions over this region are removed.
+4.  =eas0c=, which is similar to the three scenarios above, but with no *anthropogenic aerosol* (SO2, SO4, organic carbon, black carbon) emissions from East and Southeast Asia (94E-161E, 10S-65N). As with =eas0b=, shipping emissions over this region are removed.
+
+*** Prescribed-SST (F) simulations
+In order to quantify radiative effects, four prescribed-SST simulations are performed:
+1. =p17d_f_2000=, which uses the =year-2000= emissions.
+2. =p17d_f_eas0=, which uses the =eas0= emissions.
+3. =p17d_f_eas0b=, which uses the =eas0b= emissions.
+4. =p17d_f_eas0c=, which uses the =eas0c= emissions.
+
+These prescribed-SST simulations are configured as follows:
+1. Greenhouse gas concentrations and sea-surface temperatures (SSTs) are prescribed using *year-2000 climatological values*, based on the =F_2000_CAM5= (=FC5=) [[http://www.cesm.ucar.edu/models/cesm1.2/cesm/doc/modelnl/compsets.html][compset]].
+2. The *RFP components* are diagnosed following [[http://www.atmos-chem-phys.net/13/9971/2013/][Ghan (2013)]]. The "online" radiation call includes aerosol-radiation interactions; the "offline" diagnostic radiation call calculates "clean-sky" fluxes.
+3. A resolution of *f19_g16* is specified.
+4. Each simulation is run for *32 years*, allowing the first two years to be excluded as spin-up. (Nudging is not be performed.)
+5. The simulations are performed on *Cheyenne*, using 720 processors (20 nodes). Model throughput is approximately 47 years/day, with a cost of 360-370 pe-hrs/yr.
+
+Details of the configuration can be found in [[https://github.com/grandey/p17d-sulphur-eas-eqm/blob/master/config_simulations/config_f_simulations.org][config_f_simulations.org]].
+
+*** Equilibrium coupled atmosphere-ocean (B) simulations
+In order to investigate the equilibrium climate response, four coupled atmosphere-ocean simulations are performed:
+1. =p17d_b_2000=, which uses the =year-2000= emissions.
+2. =p17d_b_eas0=, which uses the =eas0= emissions.
+3. =p17d_b_eas0b=, which uses the =eas0b= emissions.
+4. =p17d_b_eas0c=, which uses the =eas0c= emissions.
+
+These atmosphere-ocean simulations are configured as follows:
+1. Greenhouse gas concentrations are prescribed using *year-2000 climatological values*, based on the =B_2000_CAM5_CN= (=BC5CN=) [[http://www.cesm.ucar.edu/models/cesm1.2/cesm/doc/modelnl/compsets.html][compset]].
+2. Data for *dynamical downscaling* are produced.
+3. A resolution of *f19_g16* are specified.
+4. Each simulation is run for *100 years*, allowing several decades to be excluded as spin-up.
+5. The simulations are performed on *Cheyenne*, using 128 processors for the ocean in addition to 720 processors for the other model components (24 nodes total). Model throughput is approximately 30 years/day, with a cost of 630-660 pe-hrs/yr.
+
+Details of the configuration can be found in [[https://github.com/grandey/p17d-sulphur-eas-eqm/blob/master/config_simulations/config_b_simulations.org][config_b_simulations.org]].
+

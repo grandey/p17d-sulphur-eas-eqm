@@ -1,0 +1,64 @@
+#+TITLE: p17d-sulphur-eas-eqm/status.org
+#+AUTHOR: Benjamin S. Grandey
+#+OPTIONS: ^:nil
+
+** Status
+
+*** Completed
+***** DONE Prepare modified emissions for =eas0= scenario
+CLOSED: [2017-08-14 Mon 16:03]
+***** DONE Design and check =user_nl_cam= files for =p17d_f_2000= and =p17d_f_eas0=
+CLOSED: [2017-08-14 Mon 16:12]
+***** DONE Design and check configuration of =p17d_f_2000= and =p17d_f_eas0=
+CLOSED: [2017-08-14 Mon 16:17]
+***** DONE Create and submit =p17d_f_2000= and =p17d_f_eas0=
+CLOSED: [2017-08-14 Mon 16:42]
+***** DONE Design and check =user_nl_cam= files for =p17d_b_2000= and =p17d_b_eas0=
+CLOSED: [2017-08-15 Tue 14:22]
+***** DONE Design and check configuration of =p17d_b_2000= and =p17d_b_eas0=
+CLOSED: [2017-08-15 Tue 14:25]
+***** DONE Create and submit =p17d_b_2000= and =p17d_b_eas0=
+CLOSED: [2017-08-15 Tue 14:44]
+***** DONE Archive copy of =p17d_f_2000= and =p17d_f_eas0= to Newton
+CLOSED: [2017-08-16 Wed 10:40]
+***** DONE Archive copy of coupled =p17d_b_2000= and =p17d_b_eas0= to Newton
+CLOSED: [2017-08-21 Mon 14:06]
+***** DONE Check that no downscaling data files are missing from =p17d_b_2000= and =p17d_b_eas0= on Newton 
+CLOSED: [2017-08-21 Mon 11:54]
+***** DONE AMWG diagnostics for =p17d_b_eas0-p17d_b_2000=
+CLOSED: [2017-08-21 Mon 15:55]
+***** DONE AMWG diagnostics for =p17d_f_eas0-p17d_f_2000=
+CLOSED: [2017-08-21 Mon 15:55]
+***** DONE Convert atm h0 data from =p17d_f_2000=, =p17d_f_eas0=, =p17d_b_2000=, and =p17d_b_eas0= to time-series format on Newton
+CLOSED: [2017-08-21 Mon 17:56]
+***** DONE Prepare modified emissions for =eas0b= scenario
+CLOSED: [2017-08-21 Mon 17:56]
+***** DONE Design and check =user_nl_cam= files for =p17d_f_eas0b= and =p17d_b_eas0b=
+CLOSED: [2017-08-21 Mon 18:06]
+***** DONE Design and check configuration of =p17d_f_eas0b= and =p17d_b_eas0b=
+CLOSED: [2017-08-21 Mon 18:10]
+***** DONE Create and submit =p17d_f_eas0b= and =p17d_b_eas0b=
+CLOSED: [2017-08-21 Mon 20:25]
+***** DONE Archive copy of =p17d_f_eas0b= data to Newton
+CLOSED: [2017-08-22 Tue 14:53]
+***** DONE Convert atm h0 data from =p17d_f_eas0b= to time-series format on Newton
+CLOSED: [2017-08-22 Tue 18:01]
+***** DONE Prepare modified emissions for =eas0c= scenario
+CLOSED: [2017-08-23 Wed 15:21]
+***** DONE Design and check =user_nl_cam= files for =p17d_f_eas0c= and =p17d_b_eas0c=
+CLOSED: [2017-08-23 Wed 15:21]
+***** DONE Design and check configuration of =p17d_f_eas0c= and =p17d_b_eas0c=
+CLOSED: [2017-08-23 Wed 15:32]
+***** DONE Create and submit =p17d_f_eas0c= and =p17d_b_eas0c=
+CLOSED: [2017-08-23 Wed 15:38]
+***** DONE Archive copy of =p17d_f_eas0c= to Newton, and convert atm h0 data to time-series format on Newton
+CLOSED: [2017-08-24 Thu 13:19]
+***** DONE Convert atm h0 data from =p17d_b_eas0b= and =p17d_b_eas0c= to time-series format on Newton
+CLOSED: [2017-09-04 Mon 15:55]
+***** DONE Archive copy of =p17d_b_eas0b= and =p17d_b_eas0c= data to Newton
+CLOSED: [2017-09-21 Thu 17:12]
+***** DONE Check that no downscaling data files are missing from =p17d_b_eas0b= and =p17d_b_eas0c= on Newton
+CLOSED: [2017-09-19 Tue 12:09]
+
+*** Still to-do
+
