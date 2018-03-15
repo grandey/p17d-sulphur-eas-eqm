@@ -3,7 +3,22 @@
 #+OPTIONS: ^:nil
 
 ** Introduction
-This repository contains details of the experimental design, model configuration, data management, and analysis procedure for the manuscript titled "The equilibrium climate response to sulfur dioxide and carbonaceous aerosol emissions from East and Southeast Asia" by B. S. Grandey, L. K. Yeo, H.-H. Lee, and C. Wang (in preparation).
+This repository contains details of the experimental design, model configuration, data management, and [[https://github.com/grandey/p17d-sulphur-eas-eqm/tree/master/analysis_draft2018a][analysis procedure and scripts]] for the manuscript titled "The equilibrium climate response to sulfur dioxide and carbonaceous aerosol emissions from East and Southeast Asia" by B. S. Grandey, L. K. Yeo, H.-H. Lee, and C. Wang (in preparation).
+
+** Contents
+1. [[https://github.com/grandey/p17d-sulphur-eas-eqm/blob/master/experimental_design.org][experimental_design.org]] provides an introduction to the *experimental design*.
+2. [[https://github.com/grandey/p17d-sulphur-eas-eqm/tree/master/input_data_p17d][input_data_p17d/]] contains information and scripts relating to the *input data*.
+3. [[https://github.com/grandey/p17d-sulphur-eas-eqm/tree/master/user_nl_cam][user_nl_cam/]] contains the =user_nl_cam= namelist files for the simulations.
+4. [[https://github.com/grandey/p17d-sulphur-eas-eqm/tree/master/config_simulations][config_simulations/]] contains information and scripts for *creating, building, and submitting* the simulations. The scripts have been generated using the two =.org= files.
+5. [[https://github.com/grandey/p17d-sulphur-eas-eqm/tree/master/analysis_prelim][analysis_prelim/]] contains scripts used for *preliminary analysis* of the simulation output data.
+6. [[https://github.com/grandey/p17d-sulphur-eas-eqm/tree/master/analysis_draft2018a][analysis_draft2018a/]] contains scripts used for the *final analysis* of the simulation output data, including generation of the *figures* included in the manuscript.
+
+** Scenarios
+The scenarios described in this repository are named differently in the manuscript:
+1. =year-2000= corresponds to *Ref*;
+2. =eas0= is not analysed in the manuscript;
+3. =eas0b= corresponds to *Exp1*;
+4. =eas0c= corresponds to *Exp2*.
 
 ** Author
 Benjamin S. Grandey, 2017-2018, in collaboration with Yeo Lik Khian, Lee Hsiang-He, and [[http://web.mit.edu/wangc/][Chien Wang]].
