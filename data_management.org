@@ -91,7 +91,7 @@ Second, =s2run= is run in parallel in order to convert the data to time-series f
 #+BEGIN_SRC
 mpirun -n 8 s2srun --verbosity=2 $OUT_DIR/specfile_$CASENAME.s2s
 #+END_SRC
-
+ 
 *** Syncing to local machine for analysis
 Data of interest can then be pulled from Newton using rsync.
 
@@ -99,7 +99,7 @@ Prescribed-SST simulation data of interest:
 
 #+BEGIN_SRC
 CASENAME_LIST="p17d_f_2000 p17d_f_eas0 p17d_f_eas0b p17d_f_eas0c"
-VARIABLE_LIST="FSNTOA FSNTOA_d1 FSNTOAC_d1 SWCF_d1 LWCF LWCF_d1 CLDHGH TGCLDIWP"
+VARIABLE_LIST="FSNTOA FSNTOA_d1 FSNTOAC_d1 SWCF_d1 LWCF CLDHGH TGCLDIWP"
 #+END_SRC
 
 Coupled atmosphere-ocean simulation data of interest:
@@ -123,3 +123,13 @@ do
 done
 #+END_SRC
 
+*** Uploading data to Figshare
+
+**** Input data
+Archiving emissions data files in input_data_p17d.tar.gz.
+
+**** Output timeseries data
+A subset of the atmosphere output NetCDF files have been previously synced to  $HOME/data/projects/p17d_sulphur_eas_eqm/output_timeseries/ on the local machine (see above). The total size is approximately 14GB.
+
+**** History of Figshare publication
+- 2018-04-02 - Starting to upload data. Entering metadata. Title: Data for "The equilibrium climate response to sulfur dioxide and carbonaceous aerosol emissions from East and Southeast Asia". Reserving DOI: https://doi.org/10.6084/m9.figshare.6072887. Not yet published.
