@@ -2,6 +2,8 @@
 #+AUTHOR: Benjamin S. Grandey
 #+OPTIONS: ^:nil
 
+[[https://zenodo.org/badge/latestdoi/99929128][https://zenodo.org/badge/99929128.svg]]
+
 ** Introduction
 This repository contains details of the experimental design, model configuration, data management, and [[https://github.com/grandey/p17d-sulphur-eas-eqm/tree/master/analysis_draft2018a][analysis procedure and scripts]] for the manuscript titled "The equilibrium climate response to sulfur dioxide and carbonaceous aerosol emissions from East and Southeast Asia" by B. S. Grandey, L. K. Yeo, H.-H. Lee, and C. Wang (in preparation).
 
