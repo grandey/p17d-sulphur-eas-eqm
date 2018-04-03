@@ -11,8 +11,9 @@ Dependencies:
     - xarray
 
 Data requirements:
-    - Default and modified MAM3 emissions data
-    - CESM output data in timeseries format.
+    - Default MAM3 emissions data (available from the CESM input data repository).
+    - Modified MAM3 emissions data (https://doi.org/10.6084/m9.figshare.6072887).
+    - CESM output data in timeseries format (https://doi.org/10.6084/m9.figshare.6072887).
 
 Author:
     Benjamin S. Grandey, 2018
@@ -26,9 +27,12 @@ import xarray as xr
 
 
 # Directories holding data
-p17d_emis_dir = os.path.expandvars('../input_data_p17d/')  # modified emissions
-mam_emis_dir = os.path.expandvars('$HOME/data/inputdataCESM/trop_mozart_aero/emis/')  # default
-output_dir = os.path.expandvars('$HOME/data/projects/p17d_sulphur_eas_eqm/output_timeseries/')
+# Modified emissions, https://doi.org/10.6084/m9.figshare.6072887
+p17d_emis_dir = os.path.expandvars('$HOME/data/figshare/figshare6072887/input_data_p17d/')
+# Default MAM3 emissions
+mam_emis_dir = os.path.expandvars('$HOME/data/inputdataCESM/trop_mozart_aero/emis/')
+# CESM output data in timeseries format, https://doi.org/10.6084/m9.figshare.6072887
+output_dir = os.path.expandvars('$HOME/data/figshare/figshare6072887/')
 
 
 def dependency_versions():
