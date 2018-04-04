@@ -5,7 +5,7 @@
 [[https://zenodo.org/badge/latestdoi/99929128][https://zenodo.org/badge/99929128.svg]]
 
 ** Introduction
-This repository contains details of the experimental design, model configuration, data management, and [[https://github.com/grandey/p17d-sulphur-eas-eqm/tree/master/analysis_draft2018a][analysis procedure and scripts]] for the manuscript titled "The equilibrium climate response to sulfur dioxide and carbonaceous aerosol emissions from East and Southeast Asia" by B. S. Grandey, L. K. Yeo, H.-H. Lee, and C. Wang (in preparation).
+This repository contains details of the experimental design, model configuration, data management, and [[https://github.com/grandey/p17d-sulphur-eas-eqm/tree/master/analysis_draft2018a][analysis procedure and scripts]] for the manuscript titled "The equilibrium climate response to sulfur dioxide and carbonaceous aerosol emissions from East and Southeast Asia" by B. S. Grandey, L. K. Yeo, H.-H. Lee, and C. Wang (submitted).
 
 ** Contents
 1. [[https://github.com/grandey/p17d-sulphur-eas-eqm/blob/master/experimental_design.org][experimental_design.org]] provides an introduction to the *experimental design*.
@@ -31,5 +31,5 @@ Benjamin S. Grandey, 2017-2018, in collaboration with Yeo Lik Khian, Lee Hsiang-
 This research is supported by the National Research Foundation of Singapore under its Campus for Research Excellence and Technological Enterprise programme.  The Center for Environmental Sensing and Modeling is an interdisciplinary research group of the Singapore-MIT Alliance for Research and Technology.  This research is also supported by the U.S. National Science Foundation (AGS-1339264) and the U.S. Department of Energy, Office of Science (DE-FG02-94ER61937).  The CESM project is supported by the National Science Foundation and the Office of Science (BER) of the U.S. Department of Energy.  We acknowledge high-performance computing support from Cheyenne ([[http://dx.doi.org/10.5065/D6RX99HX][doi:10.5065/D6RX99HX]]) provided by NCAR’s Computational and Information Systems Laboratory, sponsored by the National Science Foundation.
 
 ** Primary referance
-B. S. Grandey, L. K. Yeo, H.-H. Lee, and C. Wang (in preparation), "The equilibrium climate response to sulfur dioxide and carbonaceous aerosol emissions from East and Southeast Asia".
+B. S. Grandey, L. K. Yeo, H.-H. Lee, and C. Wang (submitted), "The equilibrium climate response to sulfur dioxide and carbonaceous aerosol emissions from East and Southeast Asia".
 
