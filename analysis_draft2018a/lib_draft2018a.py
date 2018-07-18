@@ -14,6 +14,7 @@ Data requirements:
     - Default MAM3 emissions data (available from the CESM input data repository).
     - Modified MAM3 emissions data (https://doi.org/10.6084/m9.figshare.6072887).
     - CESM output data in timeseries format (https://doi.org/10.6084/m9.figshare.6072887).
+    - Data from G16 (Grandey et al., JClim, 2016) (http://doi.org/10.6084/m9.figshare.2067084).
 
 Author:
     Benjamin S. Grandey, 2018
@@ -33,6 +34,8 @@ p17d_emis_dir = os.path.expandvars('$HOME/data/figshare/figshare6072887/input_da
 mam_emis_dir = os.path.expandvars('$HOME/data/inputdataCESM/trop_mozart_aero/emis/')
 # CESM output data in timeseries format, https://doi.org/10.6084/m9.figshare.6072887
 output_dir = os.path.expandvars('$HOME/data/figshare/figshare6072887/')
+# G16 CESM output data, https://doi.org/10.6084/m9.figshare.2067084
+g16_dir = os.path.expandvars('$HOME/data/figshare/figshare2067084/')
 
 
 def dependency_versions():
@@ -87,7 +90,11 @@ def load_scenario_name_dict():
     """
     scenario_name_dict = {'2000': 'Ref',
                           'eas0b': 'Exp1',
-                          'eas0c': 'Exp2'}
+                          'eas0c': 'Exp2',
+                          'R45': 'RCP4.5',
+                          'A2x': 'A2x',
+                          'pR45': 'pRCP4.5',
+                          'pA2x': 'pA2x'}
     return scenario_name_dict
 
 
@@ -160,6 +167,21 @@ def load_variable_sf_dict():
                         'OMEGA_ml19': 1000,  # Pa/s -> mPa/s
                         }
     return variable_sf_dict
+
+
+def load_variable_g16_dict():
+    """
+    Load dictionary containing equivalent variables in the G16 data.
+    """
+    variable_g16_dict = {'FSNTOA+LWCF': 'cFNTOA',
+                         'SWCF_d1': 'SWCF_d1',
+                         'LWCF': 'LWCF_d1',  # clean-sky LWCF similar to normal LWCF
+                         'FSNTOA-FSNTOA_d1': 'cDRE',
+                         'FSNTOAC_d1': 'FSNTOAC_d1',
+                         'TS': 'TS',
+                         'PRECC+PRECL': 'PRECT'
+                         }
+    return variable_g16_dict
 
 
 def load_species_sf_dict():
@@ -240,15 +262,15 @@ def load_output(variable='TS', scenario='eas0c', f_or_b='b', season='annual', ap
     Args:
         variable: string of variable name to load (default 'TS')
         scenario: string scenario name (default 'eas0c')
-        f_or_b: 'f' (prescribed-SST) or 'b' (coupled atmosphere-ocean; only)
+        f_or_b: 'f' (prescribed-SST) or 'b' (coupled atmosphere-ocean; default)
         season: 'annual' (default) or name of season (e.g 'DJF')
         apply_sf: apply scale factor? (default True)
 
     Returns:
         xarray DataArray
     """
-    # If + or - in variable, call function recursively
-    if '+' in variable or '-' in variable:
+    # If + or - in variable and the scenario is not a G16 scenario, call function recursively
+    if ('+' in variable or '-' in variable) and scenario in ['2000', 'eas0b', 'eas0c']:
         variable1, variable2 = re.split('[+\-]', variable)
         data1 = load_output(variable1, scenario=scenario, f_or_b=f_or_b, season=season,
                             apply_sf=apply_sf)
@@ -258,7 +280,7 @@ def load_output(variable='TS', scenario='eas0c', f_or_b='b', season='annual', ap
             data = data1 + data2
         elif '-' in variable:
             data = data1 - data2
-    else:
+    elif scenario in ['2000', 'eas0b', 'eas0c']:  # p17d simulations
         # Read data
         in_filename = '{}/p17d_{}_{}.cam.h0.{}.nc'.format(output_dir, f_or_b, scenario, variable)
         ds = xr.open_dataset(in_filename, decode_times=False)
@@ -275,6 +297,50 @@ def load_output(variable='TS', scenario='eas0c', f_or_b='b', season='annual', ap
             data = data.where(data['year'] >= 1703, drop=True)
         elif f_or_b == 'b':  # discard 40 years for 'b' simulations
             data = data.where(data['year'] >= 1741, drop=True)
+    elif scenario in ['pA2x', 'pR45']:  # G16 prescribed-SST simulations
+        # Get G16 equivalent variable name
+        variable_g16 = load_variable_g16_dict()[variable]
+        # Read data
+        in_filename = '{}/{}.nc'.format(g16_dir, scenario)
+        ds = xr.open_dataset(in_filename, decode_times=False)
+        # Convert time coordinates
+        ds = climapy.cesm_time_from_bnds(ds, min_year=1701)
+        # Calculate annual/seasonal mean for each year (Jan-Dec), using arithmetic mean
+        if season == 'annual':
+            data = ds[variable_g16].groupby('time.year').mean(dim='time')
+        else:
+            data = ds[variable_g16].where(ds['time.season'] == season,
+                                      drop=True).groupby('time.year').mean(dim='time')
+        # Discard two years spin-up (diff from G16, where 2 years 11 months were discarded)
+        data = data.where(data['year'] >= 1703, drop=True)
+    else:  # G16 transient simulations
+        # Get G16 equivalent variable name
+        variable_g16 = load_variable_g16_dict()[variable]
+        # Get data for three ensemble members
+        da_list = []
+        for ic in ['f1', 'h1', 'h2']:
+            # Read data
+            in_filename = '{}/{}_{}.nc'.format(g16_dir, scenario, ic)
+            ds = xr.open_dataset(in_filename, decode_times=False)
+            # Convert time coordinates
+            ds = climapy.cesm_time_from_bnds(ds, min_year=1701)
+            # Calculate annual/seasonal mean for each year (Jan-Dec), using arithmetic mean
+            if season == 'annual':
+                da = ds[variable_g16].groupby('time.year').mean(dim='time')
+            else:
+                da = ds[variable_g16].where(ds['time.season'] == season,
+                                            drop=True).groupby('time.year').mean(dim='time')
+            # Select 2080-2099
+            da = da.where(da['year'] >= 2080, drop=True)
+            # Shift time dimension to facilitate concatenation
+            if ic == 'h1':
+                da['year'] += 20
+            elif ic == 'h2':
+                da['year'] += 40
+            # Append to list
+            da_list.append(da)
+        # Concatenate data from three ensemble members
+        data = xr.concat(da_list, dim='year')
     # Apply scale factor?
     if apply_sf:
         try:
