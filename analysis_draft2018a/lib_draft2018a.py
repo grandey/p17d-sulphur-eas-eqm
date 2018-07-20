@@ -357,14 +357,14 @@ def load_output_monthly(variable='TS', scenario='eas0c', f_or_b='b', apply_sf=Tr
     Args:
         variable: string of variable name to load (default 'TS')
         scenario: string scenario name (default 'eas0c')
-        f_or_b: 'f' (prescribed-SST) or 'b' (coupled atmosphere-ocean; only)
+        f_or_b: 'f' (prescribed-SST) or 'b' (coupled atmosphere-ocean; default)
         apply_sf: apply scale factor? (default True)
 
     Returns:
         xarray DataArray
     """
-    # If + or - in variable, call function recursively
-    if '+' in variable or '-' in variable:
+    # If + or - in variable and the scenario is not a G16 scenario, call function recursively
+    if ('+' in variable or '-' in variable) and scenario in ['2000', 'eas0b', 'eas0c']:
         variable1, variable2 = re.split('[+\-]', variable)
         data1 = load_output_monthly(variable1, scenario=scenario, f_or_b=f_or_b,
                                     apply_sf=apply_sf)
@@ -374,7 +374,7 @@ def load_output_monthly(variable='TS', scenario='eas0c', f_or_b='b', apply_sf=Tr
             data = data1 + data2
         elif '-' in variable:
             data = data1 - data2
-    else:
+    elif scenario in ['2000', 'eas0b', 'eas0c']:  # p17d simulations
         # Read data
         in_filename = '{}/p17d_{}_{}.cam.h0.{}.nc'.format(output_dir, f_or_b, scenario, variable)
         ds = xr.open_dataset(in_filename, decode_times=False)
@@ -382,7 +382,7 @@ def load_output_monthly(variable='TS', scenario='eas0c', f_or_b='b', apply_sf=Tr
         ds = climapy.cesm_time_from_bnds(ds, min_year=1701)
         # Select variable
         data = ds[variable]
-        # Split time into seperate year and month dimensions
+        # Split time into separate year and month dimensions
         d_list = []
         for m in range(1, 13):  # loop over months
             d = data.where(data['time.month'] == m,
@@ -395,6 +395,40 @@ def load_output_monthly(variable='TS', scenario='eas0c', f_or_b='b', apply_sf=Tr
             data = data.where(data['year'] >= 1703, drop=True)
         elif f_or_b == 'b':  # discard 40 years for 'b' simulations
             data = data.where(data['year'] >= 1741, drop=True)
+    elif scenario in ['pA2x', 'pR45']:  # G16 prescribed-SST simulations
+        raise NotImplementedError('G16 prescribed-SST simulations not supported')
+    else:  # G16 transient simulations
+        # Get G16 equivalent variable name
+        variable_g16 = load_variable_g16_dict()[variable]
+        # Get data for three ensemble members
+        da_list = []
+        for ic in ['f1', 'h1', 'h2']:
+            # Read data
+            in_filename = '{}/{}_{}.nc'.format(g16_dir, scenario, ic)
+            ds = xr.open_dataset(in_filename, decode_times=False)
+            # Convert time coordinates
+            ds = climapy.cesm_time_from_bnds(ds, min_year=1701)
+            # Select variable
+            da = ds[variable_g16]
+            # Split time into separate year and month dimensions
+            d_list = []
+            for m in range(1, 13):  # loop over months
+                d = da.where(da['time.month'] == m,
+                             drop=True).groupby('time.year').mean(dim='time')
+                d['month'] = m  # add month coordinate
+                d_list.append(d)
+            da = xr.concat(d_list, dim='month')
+            # Select 2080-2099
+            da = da.where(da['year'] >= 2080, drop=True)
+            # Shift time dimension to facilitate concatenation
+            if ic == 'h1':
+                da['year'] += 20
+            elif ic == 'h2':
+                da['year'] += 40
+            # Append to list
+            da_list.append(da)
+        # Concatenate data from three ensemble members
+        data = xr.concat(da_list, dim='year')
     # Apply scale factor?
     if apply_sf:
         try:
