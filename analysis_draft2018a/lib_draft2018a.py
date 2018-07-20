@@ -15,6 +15,8 @@ Data requirements:
     - Modified MAM3 emissions data (https://doi.org/10.6084/m9.figshare.6072887).
     - CESM output data in timeseries format (https://doi.org/10.6084/m9.figshare.6072887).
     - Data from G16 (Grandey et al., JClim, 2016) (http://doi.org/10.6084/m9.figshare.2067084).
+    - GPCP v2.3 1981-2010 mean monthly data
+      (https://www.esrl.noaa.gov/psd/data/gridded/data.gpcp.html, accessed 2018-07-18).
 
 Author:
     Benjamin S. Grandey, 2018
@@ -36,6 +38,8 @@ mam_emis_dir = os.path.expandvars('$HOME/data/inputdataCESM/trop_mozart_aero/emi
 output_dir = os.path.expandvars('$HOME/data/figshare/figshare6072887/')
 # G16 CESM output data, https://doi.org/10.6084/m9.figshare.2067084
 g16_dir = os.path.expandvars('$HOME/data/figshare/figshare2067084/')
+# GPCP v2.3 1981-2010 mean monthly climatology file
+gpcp_filename = os.path.expandvars('$HOME/data/datasets/gpcp/precip.mon.ltm.nc')
 
 
 def dependency_versions():
